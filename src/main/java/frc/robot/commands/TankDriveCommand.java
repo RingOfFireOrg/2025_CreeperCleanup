@@ -4,65 +4,43 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj.XboxController;
+import frc.robot.subsystems.DriveTrainSubSystem;
 import frc.robot.Constants;
-import frc.robot.Robot;
 
 public class TankDriveCommand extends Command {
-  /** Creates a new TankDriveCommand. */
-  public TankDriveCommand() {
-    // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(Robot.myDriveTrain);
-  }
+    private final DriveTrainSubSystem driveTrain;
+    private final XboxController controller;
+    private final double speedFactor = 0.58;
 
-  private double speedFactor = 0.58;
-  // Called when the command is initially scheduled.
-  @Override
-  public void initialize() {}
-
-  // Called every time the scheduler runs while the command is scheduled.
-  @Override
-  public void execute() {
-    //Get the value from the user.. how the drive controller is pressed
-    double LeftStickY = Robot.m_robotContainer.GetDriverRawAxis(Constants.LEFT_STICK_Y);
-    double RightStickY = Robot.m_robotContainer.GetDriverRawAxis(Constants.RIGHT_STICK_Y);
-    LeftStickY = LeftStickY * speedFactor;
-    RightStickY = RightStickY * speedFactor;
-    SmartDashboard.putNumber("LeftStickValue", LeftStickY);
-    SmartDashboard.putNumber("RightStickValue", RightStickY);
-
-
-    // This is the code that actually drives the robot... We are multiplying the speeds so that it grudually increases the speed
-    if(LeftStickY <= 0)
-    {
-      Robot.myDriveTrain.setLeftMotors(-(LeftStickY*LeftStickY));
+    public TankDriveCommand(DriveTrainSubSystem subsystem, XboxController controller) {
+        this.driveTrain = subsystem;
+        this.controller = controller;
+        addRequirements(subsystem);
     }
-    else{
-      Robot.myDriveTrain.setLeftMotors(LeftStickY*LeftStickY);
-    }
-    
-    if(RightStickY <= 0)
-    {
-      Robot.myDriveTrain.setRightMotors(-(RightStickY*RightStickY));
-    }
-    else{
-      Robot.myDriveTrain.setRightMotors(RightStickY*RightStickY);
-    }
-    
-  }
 
-  // Called once the command ends or is interrupted.
-  @Override
-  public void end(boolean interrupted) {
-    Robot.myDriveTrain.setLeftMotors(0);
-    Robot.myDriveTrain.setRightMotors(0);
-    
-  }
+    @Override
+    public void execute() {
+        double leftStickY = controller.getRawAxis(Constants.LEFT_STICK_Y) * speedFactor;
+        double rightStickY = controller.getRawAxis(Constants.RIGHT_STICK_Y) * speedFactor;
+        
+        SmartDashboard.putNumber("LeftStickValue", leftStickY);
+        SmartDashboard.putNumber("RightStickValue", rightStickY);
 
-  // Returns true when the command should end.
-  @Override
-  public boolean isFinished() {
-    return false;
-  }
+        driveTrain.setLeftMotors(Math.copySign(leftStickY * leftStickY, leftStickY));
+        driveTrain.setRightMotors(Math.copySign(rightStickY * rightStickY, rightStickY));
+    }
+
+    @Override
+    public void end(boolean interrupted) {
+        driveTrain.setLeftMotors(0);
+        driveTrain.setRightMotors(0);
+    }
+
+    @Override
+    public boolean isFinished() {
+        return false;
+    }
 }
