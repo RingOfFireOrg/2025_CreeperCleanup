@@ -26,7 +26,8 @@ public class RobotContainer {
 
     /** The container for the robot. Contains subsystems, OI devices, and commands. */
     public RobotContainer() {
-                
+        configureBindings(); // TODO is it needed? or called by wpilib? 
+        configureButtonBindings(); // TODO same here?       
         driveTrain.setDefaultCommand(
             new TankDriveCommand(driveTrain, driverController)
         );

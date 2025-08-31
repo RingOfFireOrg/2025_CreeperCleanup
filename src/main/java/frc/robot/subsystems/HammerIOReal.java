@@ -1,7 +1,8 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.motorcontrol.PWMSparkMax;
-import frc.robot.subsystems.interfaces.HammerIO;
+import edu.wpi.first.wpilibj.Timer;
+//import frc.robot.subsystems.HammerIO;
 
 public class HammerIOReal implements HammerIO {
     private final PWMSparkMax motor;
@@ -20,5 +21,23 @@ public class HammerIOReal implements HammerIO {
     public void setVoltage(double volts) {
         lastAppliedVolts = volts;
         motor.setVoltage(volts);
+    }
+
+    public void hit() {
+        motor.set(1.0);  // Full speed forward
+    }
+
+    public void retract() {
+        motor.set(-0.5); // Half speed reverse
+    }
+
+    public void stop() {
+        motor.set(0);
+    }
+
+    public void hitForTime(double seconds) {
+        hit();
+        Timer.delay(seconds);
+        stop();
     }
 }

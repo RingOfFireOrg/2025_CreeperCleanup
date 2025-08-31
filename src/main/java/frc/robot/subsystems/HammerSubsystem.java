@@ -2,8 +2,8 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.subsystems.interfaces.HammerIO;
-import frc.robot.subsystems.interfaces.HammerIO.HammerIOInputs;
+//import frc.robot.subsystems.HammerIO;
+import frc.robot.subsystems.HammerIO.HammerIOInputs;
 
 public class HammerSubsystem extends SubsystemBase {
     private final HammerIO io;
