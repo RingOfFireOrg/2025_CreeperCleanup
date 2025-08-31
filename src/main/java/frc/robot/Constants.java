@@ -15,7 +15,7 @@ package frc.robot;
 
 public final class Constants {
     // Drive Motor IDs
-    public static final int MOTOR_LEFT_1_ID = 0;
+    public static final int MOTOR_LEFT_1_ID = 0; // ID for left motor   
     public static final int MOTOR_RIGHT_1_ID = 1;
 
     // Controller IDs
@@ -46,4 +46,11 @@ public final class Constants {
         public static final double MAX_SPEED = 0.8;
         public static final double MIN_SPEED = -0.8;
     }
+
+    public static final class HammerConstants {
+        public static final int kMotorPWMPort = 0; // Change to match your robot's PWM port
+        public static final double kMaxVoltage = 12.0;
+    }
 }
+
+

@@ -6,8 +6,11 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.commands.HammerMoveCommand;
 import frc.robot.commands.TankDriveCommand;
 import frc.robot.subsystems.DriveTrainSubSystem;
+import frc.robot.subsystems.HammerIOReal;
+import frc.robot.subsystems.HammerSubsystem;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -18,16 +21,27 @@ import frc.robot.subsystems.DriveTrainSubSystem;
 public class RobotContainer {
     private final XboxController driverController = new XboxController(0);
     private final DriveTrainSubSystem driveTrain = new DriveTrainSubSystem();
+    private final HammerSubsystem m_hammer = new HammerSubsystem(new HammerIOReal(Constants.HammerConstants.kMotorPWMPort));
+
 
     /** The container for the robot. Contains subsystems, OI devices, and commands. */
     public RobotContainer() {
-        configureButtonBindings();
-        
+                
         driveTrain.setDefaultCommand(
             new TankDriveCommand(driveTrain, driverController)
         );
+        
     }
 
+    private void configureBindings() {
+        // Example: Run hammer with joystick
+        m_hammer.setDefaultCommand(
+            new HammerMoveCommand (
+                m_hammer,
+                () -> -driverController.getRawAxis(1) * Constants.HammerConstants.kMaxVoltage
+            )
+        );
+    }
     // XBox Controllers constants
     private XboxController ManipulatorController = new XboxController(Constants.CONTROLLER_MANIPULATOR_ID);
 
