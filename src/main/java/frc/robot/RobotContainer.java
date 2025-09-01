@@ -4,17 +4,23 @@
 
 package frc.robot;
 
+//import java.lang.ModuleLayer.Controller;
+//import java.util.function.DoubleSupplier;
+
 import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
+import edu.wpi.first.wpilibj.event.EventLoop;
+import edu.wpi.first.wpilibj2.command.button.Trigger;
+//import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.RunCommand;
+//import edu.wpi.first.wpilibj2.command.RunCommand;
 import frc.robot.commands.HammerMoveCommand;
-import frc.robot.commands.HammerSwingForwardCommand;
-import frc.robot.commands.HammerSwingBackwardCommand;
+//import frc.robot.commands.HammerSwingForwardCommand;
+//import frc.robot.commands.HammerSwingBackwardCommand;
 import frc.robot.commands.TankDriveCommand;
 import frc.robot.subsystems.DriveTrainSubSystem;
-import frc.robot.subsystems.HammerInterfaceReal;
+//import frc.robot.subsystems.HammerInterfaceReal;
 import frc.robot.subsystems.HammerSubsystem;
+//import frc.robot.Constants;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -28,15 +34,24 @@ public class RobotContainer {
     private final XboxController ManipulatorController = new XboxController(Constants.CONTROLLER_MANIPULATOR_ID);
 
     private final DriveTrainSubSystem driveTrain = new DriveTrainSubSystem();
-    private final HammerSubsystem m_hammer = new HammerSubsystem(new HammerInterfaceReal(Constants.HammerConstants.kMotorPWMPort));
+    //private final HammerSubsystem m_hammer = new HammerSubsystem(new HammerInterfaceReal(Constants.HammerConstants.kMotorPWMPort));
+    private final HammerSubsystem m_hammer = new HammerSubsystem(Constants.HammerConstants.kMotorPWMPort);
+
+    //private final DoubleSupplier voltageSupplier; //Constants.HammerConstants.kMaxVoltage;;
 
 
     /** The container for the robot. Contains subsystems, OI devices, and commands. */
     public RobotContainer() {
-        configureBindings();  
+         
         driveTrain.setDefaultCommand(
             new TankDriveCommand(driveTrain, driverController)
         );
+
+      //  m_hammer.setDefaultCommand(
+      //      new HammerMoveCommand(m_hammer, ManipulatorController)
+      //  );
+
+        configureBindings(); 
         
     }
 
@@ -44,7 +59,13 @@ public class RobotContainer {
     }
     */
      
-     private void configureBindings() {
+    private void configureBindings() {
+        // Button A runs hammer at full speed while held
+        new Trigger(() -> ManipulatorController.a(new EventLoop()).getAsBoolean())
+            .whileTrue(new HammerMoveCommand(m_hammer, ManipulatorController, () -> 1.0));
+    }
+
+ /*     private void configureBindings() {
         // Example: Run hammer with joystick
         m_hammer.setDefaultCommand(
             new HammerMoveCommand (
@@ -53,6 +74,9 @@ public class RobotContainer {
             )
         );
      }
+*/
+
+
         //ManipulatorController.a().whileTrue(new HammerSwingForwardCommand(m_hammer));
         //ManipulatorController.b().whileTrue(new HammerSwingBackwardCommand(m_hammer));
   

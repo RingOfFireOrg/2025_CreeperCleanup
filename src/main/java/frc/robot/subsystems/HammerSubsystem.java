@@ -1,26 +1,43 @@
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj.motorcontrol.PWMSparkMax;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+
+import edu.wpi.first.wpilibj.Timer;
+
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 //import frc.robot.subsystems.HammerInterface;
-import frc.robot.subsystems.HammerInterface.HammerInterfaceInputs;
+//import frc.robot.subsystems.HammerInterface.HammerInterfaceInputs;
 
-public class HammerSubsystem extends SubsystemBase {
-    private final HammerInterface io;
-    private final HammerInterfaceInputs inputs = new HammerInterfaceInputs();
+public class HammerSubsystem extends SubsystemBase implements HammerInterface {
+    //private final HammerInterface io;
+    private final HammerInterface.HammerInterfaceInputs inputs = new HammerInterfaceInputs();
 
-    public HammerSubsystem(HammerInterface io) {
-        this.io = io;
+    private final PWMSparkMax motor;
+    private double lastAppliedVolts = 0.0;
+
+    public HammerSubsystem(int pwmChannel) {
+        motor = new PWMSparkMax(pwmChannel);
+        motor.stopMotor();
     }
 
     @Override
     public void periodic() {
-        io.updateInputs(inputs);
-        SmartDashboard.putNumber("Hammer/Voltage", inputs.appliedVolts);
+        updateInputs(inputs);
+        SmartDashboard.putNumber("Hammer/Voltage", lastAppliedVolts);
+    }
+
+    public void updateInputs(HammerInterfaceInputs inputs) {
+        inputs.appliedVolts = lastAppliedVolts;
+    }
+
+    public void setVoltage(double speed) {
+        motor.set(speed);
     }
 
     public void runVoltage(double volts) {
-        io.setVoltage(volts);
+        lastAppliedVolts = volts;
+        motor.setVoltage(volts);
     }
 
     public double getPosition() {
@@ -32,19 +49,25 @@ public class HammerSubsystem extends SubsystemBase {
     }
 
     public void swingForward() {
-      io.swingForward();
+        motor.set(0.5);
     }   
 
     public void swingBackward() {
-        io.swingBackward();
+        motor.set(-0.5); 
       }   
 
     public void stop() {
-        io.stop();
+        motor.set(0);
       }  
 
     public void setSpeed(double speed) {
-        io.setSpeed(speed);
+        motor.set(speed);
+    }
+
+    public void hitForTime(double seconds) {
+        swingForward();
+        Timer.delay(seconds);
+        stop();
     }
 
 }
