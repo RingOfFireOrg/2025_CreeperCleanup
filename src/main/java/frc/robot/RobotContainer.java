@@ -50,7 +50,7 @@ public class RobotContainer {
             new HammerMoveCommand(
                 m_hammer,
                 () -> {
-                    double xAxis = ManipulatorController.getRawAxis(0); // Assuming axis 0 is the X-axis
+                    double xAxis = ManipulatorController.getLeftTriggerAxis() - ManipulatorController.getRightTriggerAxis(); // {0to1} - {0to1} = {-1to1}
                     return xAxis * Constants.HammerConstants.kMaxVoltage;
                 }
             )
