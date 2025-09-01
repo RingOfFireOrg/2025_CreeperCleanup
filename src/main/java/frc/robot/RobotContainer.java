@@ -5,12 +5,12 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
+//import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.RunCommand;
+//import edu.wpi.first.wpilibj2.command.RunCommand;
 import frc.robot.commands.HammerMoveCommand;
-import frc.robot.commands.HammerSwingForwardCommand;
-import frc.robot.commands.HammerSwingBackwardCommand;
+//import frc.robot.commands.HammerSwingForwardCommand;
+//import frc.robot.commands.HammerSwingBackwardCommand;
 import frc.robot.commands.TankDriveCommand;
 import frc.robot.subsystems.DriveTrainSubSystem;
 import frc.robot.subsystems.HammerInterfaceReal;
@@ -47,9 +47,12 @@ public class RobotContainer {
      private void configureBindings() {
         // Example: Run hammer with joystick
         m_hammer.setDefaultCommand(
-            new HammerMoveCommand (
+            new HammerMoveCommand(
                 m_hammer,
-                () -> -ManipulatorController.getRawAxis(1) * Constants.HammerConstants.kMaxVoltage
+                () -> {
+                    double xAxis = ManipulatorController.getRawAxis(0); // Assuming axis 0 is the X-axis
+                    return xAxis * Constants.HammerConstants.kMaxVoltage;
+                }
             )
         );
      }
