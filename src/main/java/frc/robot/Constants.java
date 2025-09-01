@@ -4,6 +4,8 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.XboxController;
+
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide numerical or boolean
  * constants. This class should not be used for any other purpose. All constants should be declared
@@ -22,10 +24,15 @@ public final class Constants {
     public static final int CONTROLLER_DRIVER_ID = 0;
     public static final int CONTROLLER_MANIPULATOR_ID = 1;
 
-    // Xbox Controller Axes
-    public static final int LEFT_STICK_Y = 1;
-    public static final int RIGHT_STICK_Y = 5;
+    // Xbox Controller Axes 
+    public static final int LEFT_STICK_X = XboxController.Axis.kLeftX.value; //0;
+    public static final int LEFT_STICK_Y = XboxController.Axis.kLeftY.value; // 1;
+    public static final int RIGHT_STICK_X = XboxController.Axis.kRightX.value; //4
+    public static final int RIGHT_STICK_Y = XboxController.Axis.kRightY.value; //5
 
+    public static final int DIO_RED_LEDS = 0;
+    public static final int DIO_BLUE_LEDS = 1;
+    
     // Sweeper IDs
     public static final int SWEEPER_MOTOR_ID = 2;
     public static final int SWEEPER_LIMIT_SWITCH_ID = 0;
@@ -41,15 +48,12 @@ public final class Constants {
         public static final double AUTO_ROTATION = 0.5;
     }
 
-    // Add sweeper constants
-    public static final class SweeperConstants {
-        public static final double MAX_SPEED = 0.8;
-        public static final double MIN_SPEED = -0.8;
-    }
-
+    // Hammer constants
     public static final class HammerConstants {
-        public static final int kMotorPWMPort = 0; // Change to match your robot's PWM port
+        public static final int kMotorPWMPort = 5; // Robot's PWM port on RoboRio
         public static final double kMaxVoltage = 12.0;
+        public static final double MAX_SPEED = 0.5;
+        public static final double MIN_SPEED = -0.5;
     }
 }
 

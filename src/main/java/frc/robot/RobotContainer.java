@@ -5,8 +5,12 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.RunCommand;
 import frc.robot.commands.HammerMoveCommand;
+import frc.robot.commands.HammerSwingForwardCommand;
+import frc.robot.commands.HammerSwingBackwardCommand;
 import frc.robot.commands.TankDriveCommand;
 import frc.robot.subsystems.DriveTrainSubSystem;
 import frc.robot.subsystems.HammerIOReal;
@@ -20,6 +24,9 @@ import frc.robot.subsystems.HammerSubsystem;
  */
 public class RobotContainer {
     private final XboxController driverController = new XboxController(0);
+    //private final CommandXboxController ManipulatorController = new CommandXboxController(Constants.CONTROLLER_MANIPULATOR_ID);
+    private final XboxController ManipulatorController = new XboxController(Constants.CONTROLLER_MANIPULATOR_ID);
+
     private final DriveTrainSubSystem driveTrain = new DriveTrainSubSystem();
     private final HammerSubsystem m_hammer = new HammerSubsystem(new HammerIOReal(Constants.HammerConstants.kMotorPWMPort));
 
@@ -35,17 +42,29 @@ public class RobotContainer {
     }
 
     private void configureBindings() {
+    }
+     /*
+     private void configureBindings() {
         // Example: Run hammer with joystick
         m_hammer.setDefaultCommand(
             new HammerMoveCommand (
                 m_hammer,
-                () -> -driverController.getRawAxis(1) * Constants.HammerConstants.kMaxVoltage
+                () -> -ManipulatorController.getRawAxis(1) * Constants.HammerConstants.kMaxVoltage
             )
         );
-    }
-    // XBox Controllers constants
-    private XboxController ManipulatorController = new XboxController(Constants.CONTROLLER_MANIPULATOR_ID);
+    */
+        //ManipulatorController.a().whileTrue(new HammerSwingForwardCommand(m_hammer));
+        //ManipulatorController.b().whileTrue(new HammerSwingBackwardCommand(m_hammer));
+  
+/*        private void configureBindings() {
+            m_hammer.setDefaultCommand(
+                new RunCommand(
+                    () -> m_hammer.setSpeed(-ManipulatorController.getLeftY())  // negate to make up=forward
+                    )
+            );
 
+    }
+  */ 
     public double GetDriverRawAxis(int axis) {
         return driverController.getRawAxis(axis);
     }

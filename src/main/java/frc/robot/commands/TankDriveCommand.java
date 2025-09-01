@@ -21,6 +21,40 @@ public class TankDriveCommand extends Command {
         addRequirements(subsystem);
     }
 
+  // Called every time the scheduler runs while the command is scheduled.
+  @Override
+  public void execute() {
+    //Get the value from the user.. how the drive controller is pressed
+    double LeftStickY = controller.getRawAxis(Constants.LEFT_STICK_Y) * speedFactor;
+    double RightStickY = controller.getRawAxis(Constants.RIGHT_STICK_Y) * speedFactor;
+   
+    LeftStickY = LeftStickY * speedFactor;
+    RightStickY = RightStickY * speedFactor;
+    SmartDashboard.putNumber("LeftStickValue", LeftStickY);
+    SmartDashboard.putNumber("RightStickValue", RightStickY);
+
+
+    // This is the code that actually drives the robot... We are multiplying the speeds so that it grudually increases the speed
+    if(LeftStickY <= 0)
+    {
+      driveTrain.setLeftMotors(-(LeftStickY*LeftStickY));
+    }
+    else{
+      driveTrain.setLeftMotors(LeftStickY*LeftStickY);
+    }
+    
+    if(RightStickY <= 0)
+    {
+      driveTrain.setRightMotors(-(RightStickY*RightStickY));
+    }
+    else{
+      driveTrain.setRightMotors(RightStickY*RightStickY);
+    }
+    
+  }
+
+
+    /*
     @Override
     public void execute() {
         double leftStickY = controller.getRawAxis(Constants.LEFT_STICK_Y) * speedFactor;
@@ -32,6 +66,7 @@ public class TankDriveCommand extends Command {
         driveTrain.setLeftMotors(Math.copySign(leftStickY * leftStickY, leftStickY));
         driveTrain.setRightMotors(Math.copySign(rightStickY * rightStickY, rightStickY));
     }
+    */
 
     @Override
     public void end(boolean interrupted) {

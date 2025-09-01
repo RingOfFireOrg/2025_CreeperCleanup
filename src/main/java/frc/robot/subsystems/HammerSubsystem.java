@@ -30,4 +30,21 @@ public class HammerSubsystem extends SubsystemBase {
     public double getVelocity() {
         return inputs.velocityDegPerSec;
     }
+
+    public void swingForward() {
+      io.swingForward();
+    }   
+
+    public void swingBackward() {
+        io.swingBackward();
+      }   
+
+    public void stop() {
+        io.stop();
+      }  
+
+    public void setSpeed(double speed) {
+        io.setSpeed(speed);
+    }
+
 }

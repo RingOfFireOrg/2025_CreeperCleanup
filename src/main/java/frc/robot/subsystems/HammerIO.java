@@ -16,4 +16,10 @@ public interface HammerIO {
 
     /** Run the hammer at the specified voltage. */
     public default void setVoltage(double volts) {}
+
+    public default void swingForward() {}
+    public default void swingBackward() {}
+    public default void stop() {}
+
+    public default void setSpeed(double speed) {}
 }

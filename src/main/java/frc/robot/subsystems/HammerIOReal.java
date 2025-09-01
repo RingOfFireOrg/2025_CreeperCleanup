@@ -23,20 +23,28 @@ public class HammerIOReal implements HammerIO {
         motor.setVoltage(volts);
     }
 
-    public void hit() {
-        motor.set(1.0);  // Full speed forward
+    //public void hit() {
+    @Override
+    public void swingForward() {
+        motor.set(0.5);  //Half speed forward
     }
 
-    public void retract() {
+//    public void retract() {
+    public void swingBackward() {
         motor.set(-0.5); // Half speed reverse
+    }
+
+    public void setSpeed(double speed) {
+        motor.set(speed);
     }
 
     public void stop() {
         motor.set(0);
+        //motor.stopMotor();
     }
 
     public void hitForTime(double seconds) {
-        hit();
+        swingForward();
         Timer.delay(seconds);
         stop();
     }
