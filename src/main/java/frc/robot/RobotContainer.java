@@ -13,7 +13,7 @@ import frc.robot.commands.HammerSwingForwardCommand;
 import frc.robot.commands.HammerSwingBackwardCommand;
 import frc.robot.commands.TankDriveCommand;
 import frc.robot.subsystems.DriveTrainSubSystem;
-import frc.robot.subsystems.HammerIOReal;
+import frc.robot.subsystems.HammerInterfaceReal;
 import frc.robot.subsystems.HammerSubsystem;
 
 /**
@@ -28,22 +28,22 @@ public class RobotContainer {
     private final XboxController ManipulatorController = new XboxController(Constants.CONTROLLER_MANIPULATOR_ID);
 
     private final DriveTrainSubSystem driveTrain = new DriveTrainSubSystem();
-    private final HammerSubsystem m_hammer = new HammerSubsystem(new HammerIOReal(Constants.HammerConstants.kMotorPWMPort));
+    private final HammerSubsystem m_hammer = new HammerSubsystem(new HammerInterfaceReal(Constants.HammerConstants.kMotorPWMPort));
 
 
     /** The container for the robot. Contains subsystems, OI devices, and commands. */
     public RobotContainer() {
-        configureBindings(); // TODO is it needed? or called by wpilib? 
-        configureButtonBindings(); // TODO same here?       
+        configureBindings();  
         driveTrain.setDefaultCommand(
             new TankDriveCommand(driveTrain, driverController)
         );
         
     }
 
-    private void configureBindings() {
+    /*private void configureBindings() {
     }
-     /*
+    */
+     
      private void configureBindings() {
         // Example: Run hammer with joystick
         m_hammer.setDefaultCommand(
@@ -52,7 +52,7 @@ public class RobotContainer {
                 () -> -ManipulatorController.getRawAxis(1) * Constants.HammerConstants.kMaxVoltage
             )
         );
-    */
+     }
         //ManipulatorController.a().whileTrue(new HammerSwingForwardCommand(m_hammer));
         //ManipulatorController.b().whileTrue(new HammerSwingBackwardCommand(m_hammer));
   
@@ -78,12 +78,7 @@ public class RobotContainer {
         return false;
     }
 
-    private void configureButtonBindings() {
-        // Configure button bindings here
-    }
-
     public Command getAutonomousCommand() {
-    // TODO: Add actual autonomous command when needed
     return null;
 }
 

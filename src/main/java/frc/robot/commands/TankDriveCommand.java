@@ -34,7 +34,7 @@ public class TankDriveCommand extends Command {
     SmartDashboard.putNumber("RightStickValue", RightStickY);
 
 
-    // This is the code that actually drives the robot... We are multiplying the speeds so that it grudually increases the speed
+    // This is the code that actually drives the robot... We are multiplying the speeds so that it gradually increases the speed
     if(LeftStickY <= 0)
     {
       driveTrain.setLeftMotors(-(LeftStickY*LeftStickY));
@@ -52,7 +52,6 @@ public class TankDriveCommand extends Command {
     }
     
   }
-
 
     /*
     @Override
