@@ -9,12 +9,12 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.subsystems.DriveTrainSubSystem;
 import frc.robot.Constants;
+import frc.robot.Constants.DriveConstants;
 
 public class TankDriveCommand extends Command {
     private final DriveTrainSubSystem driveTrain;
     private final XboxController controller;
-    private final double speedFactor = 0.58;
-
+   
     public TankDriveCommand(DriveTrainSubSystem subsystem, XboxController controller) {
         this.driveTrain = subsystem;
         this.controller = controller;
@@ -25,11 +25,11 @@ public class TankDriveCommand extends Command {
   @Override
   public void execute() {
     //Get the value from the user.. how the drive controller is pressed
-    double LeftStickY = controller.getRawAxis(Constants.LEFT_STICK_Y) * speedFactor;
-    double RightStickY = controller.getRawAxis(Constants.RIGHT_STICK_Y) * speedFactor;
+    double LeftStickY = controller.getRawAxis(Constants.LEFT_STICK_Y) * DriveConstants.SPEED_FACTOR;
+    double RightStickY = controller.getRawAxis(Constants.RIGHT_STICK_Y) * DriveConstants.SPEED_FACTOR;
    
-    LeftStickY = LeftStickY * speedFactor;
-    RightStickY = RightStickY * speedFactor;
+    LeftStickY = LeftStickY * DriveConstants.SPEED_FACTOR;
+    RightStickY = RightStickY * DriveConstants.SPEED_FACTOR;
     SmartDashboard.putNumber("LeftStickValue", LeftStickY);
     SmartDashboard.putNumber("RightStickValue", RightStickY);
 
@@ -52,20 +52,6 @@ public class TankDriveCommand extends Command {
     }
     
   }
-
-    /*
-    @Override
-    public void execute() {
-        double leftStickY = controller.getRawAxis(Constants.LEFT_STICK_Y) * speedFactor;
-        double rightStickY = controller.getRawAxis(Constants.RIGHT_STICK_Y) * speedFactor;
-        
-        SmartDashboard.putNumber("LeftStickValue", leftStickY);
-        SmartDashboard.putNumber("RightStickValue", rightStickY);
-
-        driveTrain.setLeftMotors(Math.copySign(leftStickY * leftStickY, leftStickY));
-        driveTrain.setRightMotors(Math.copySign(rightStickY * rightStickY, rightStickY));
-    }
-    */
 
     @Override
     public void end(boolean interrupted) {

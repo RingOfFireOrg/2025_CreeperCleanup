@@ -16,6 +16,7 @@ public class DriveTrainSubSystem extends SubsystemBase implements DriveInterface
     public DriveTrainSubSystem() {
         motorLeft1 = new VictorSP(Constants.MOTOR_LEFT_1_ID);
         motorRight1 = new VictorSP(Constants.MOTOR_RIGHT_1_ID);
+        motorRight1.setInverted(true);
         //setDefaultCommand(new TankDriveCommand(this));
     }
 

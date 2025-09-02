@@ -39,7 +39,7 @@ public final class Constants {
 
     // Add separate inner classes for subsystem-specific constants
     public static final class DriveConstants {
-        public static final double SPEED_FACTOR = 0.58;
+        public static final double SPEED_FACTOR = 0.9;
     }
 
     // Add autonomous constants
@@ -54,6 +54,8 @@ public final class Constants {
         public static final double kMaxVoltage = 12.0;
         public static final double MAX_SPEED = 0.5;
         public static final double MIN_SPEED = -0.5;
+        public static final int HammerCANID = 21; // CAN ID for the hammer motor controller
+        public static final double VoltageFactor = 0.5; // Adjust this factor based on testing
     }
 }
 
