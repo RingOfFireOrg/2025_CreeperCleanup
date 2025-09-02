@@ -24,7 +24,7 @@ import edu.wpi.first.wpilibj.XboxController;
 public final class Constants {
     // Drive Motor IDs
     public static final int MOTOR_LEFT_1_ID = 0; // ID for left motor   
-    public static final int MOTOR_RIGHT_1_ID = 1;
+    public static final int MOTOR_RIGHT_1_ID = 1; // ID for right motor
 
     // Controller IDs
     public static final int CONTROLLER_DRIVER_ID = 0;
