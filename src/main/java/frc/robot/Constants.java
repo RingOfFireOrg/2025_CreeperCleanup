@@ -13,6 +13,12 @@ import edu.wpi.first.wpilibj.XboxController;
  *
  * <p>It is advised to statically import this class (or one of its inner classes) wherever the
  * constants are needed, to reduce verbosity.
+ * 
+ *  Key Components:
+ * - Motor IDs: MOTOR_LEFT_1_ID, MOTOR_RIGHT_1_ID.
+ * - Controller IDs: CONTROLLER_DRIVER_ID, CONTROLLER_MANIPULATOR_ID.
+ * - Axis Mappings: LEFT_STICK_X, LEFT_STICK_Y, RIGHT_STICK_X, RIGHT_STICK_Y.
+ * - Subsystem-Specific Constants: HammerConstants, DriveConstants, AutoConstants.
  */
 
 public final class Constants {

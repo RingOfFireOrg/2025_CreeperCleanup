@@ -1,3 +1,21 @@
+/**
+ * The HammerMoveCommand class controls the hammer subsystem by applying voltage based on joystick input.
+ * It is a command in the WPILib Command-based framework.
+ *
+ * Key Responsibilities:
+ * - Read joystick input (voltage supplier) and apply voltage to the hammer subsystem.
+ * - Stop the hammer when the command ends.
+ *
+ * Key Components:
+ * - Subsystem: HammerSubsystem.
+ * - Input: DoubleSupplier for joystick voltage.
+ *
+ * Lifecycle:
+ * - `initialize()`: Called once when the command starts.
+ * - `execute()`: Called repeatedly while the command is active.
+ * - `end()`: Called once when the command ends or is interrupted.
+ */
+
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.Command;

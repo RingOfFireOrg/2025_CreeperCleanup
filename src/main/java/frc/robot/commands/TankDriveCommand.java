@@ -2,6 +2,24 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
+/**
+ * The TankDriveCommand class controls the drivetrain subsystem using tank drive logic.
+ * It is a command in the WPILib Command-based framework.
+ *
+ * Key Responsibilities:
+ * - Read joystick input for left and right stick Y-axes.
+ * - Apply squared inputs to the drivetrain motors for smoother control.
+ *
+ * Key Components:
+ * - Subsystem: DriveTrainSubSystem.
+ * - Input: XboxController for joystick values.
+ *
+ * Lifecycle:
+ * - `execute()`: Called repeatedly to read joystick input and control the drivetrain.
+ * - `end()`: Stops the drivetrain motors when the command ends.
+ * - `isFinished()`: Always returns false to keep the command running.
+ */
+
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.Command;

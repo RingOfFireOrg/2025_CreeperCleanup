@@ -2,6 +2,22 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
+/**
+ * The RobotContainer class is the central hub for the robot's subsystems, commands, and input bindings.
+ * It initializes and manages the robot's subsystems, commands, and operator interface (OI) devices.
+ *
+ * Key Responsibilities:
+ * - Declare and initialize subsystems (e.g., DriveTrainSubSystem, HammerSubsystem).
+ * - Set default commands for subsystems.
+ * - Configure input bindings (e.g., joystick buttons and axes).
+ * - Provide the autonomous command to the Robot class.
+ *
+ * Key Components:
+ * - Subsystems: DriveTrainSubSystem, HammerSubsystem.
+ * - Commands: TankDriveCommand, HammerMoveCommand.
+ * - Input Devices: XboxController for driver and manipulator.
+ */
+
 package frc.robot;
 
 import edu.wpi.first.wpilibj.XboxController;
