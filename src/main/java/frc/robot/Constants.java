@@ -27,8 +27,8 @@ public final class Constants {
     public static final int MOTOR_RIGHT_1_ID = 1; // ID for right motor
 
     // Controller IDs
-    public static final int CONTROLLER_DRIVER_ID = 0;
-    public static final int CONTROLLER_MANIPULATOR_ID = 1;
+    public static final int CONTROLLER_DRIVER_ID = 0; // Driver controller ID for drivetrain
+    public static final int CONTROLLER_MANIPULATOR_ID = 1; // Manipulator controller ID for hammer
 
     // Xbox Controller Axes 
     public static final int LEFT_STICK_X = XboxController.Axis.kLeftX.value; //0;
