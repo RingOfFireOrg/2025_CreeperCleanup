@@ -7,38 +7,43 @@ package frc.robot;
 import edu.wpi.first.wpilibj.XboxController;
 
 /**
- * The Constants class provides a convenient place for teams to hold robot-wide numerical or boolean
- * constants. This class should not be used for any other purpose. All constants should be declared
+ * The Constants class provides a convenient place for teams to hold robot-wide
+ * numerical or boolean
+ * constants. This class should not be used for any other purpose. All constants
+ * should be declared
  * globally (i.e. public static). Do not put anything functional in this class.
  *
- * <p>It is advised to statically import this class (or one of its inner classes) wherever the
+ * <p>
+ * It is advised to statically import this class (or one of its inner classes)
+ * wherever the
  * constants are needed, to reduce verbosity.
  * 
- *  Key Components:
+ * Key Components:
  * - Motor IDs: MOTOR_LEFT_1_ID, MOTOR_RIGHT_1_ID.
  * - Controller IDs: CONTROLLER_DRIVER_ID, CONTROLLER_MANIPULATOR_ID.
  * - Axis Mappings: LEFT_STICK_X, LEFT_STICK_Y, RIGHT_STICK_X, RIGHT_STICK_Y.
- * - Subsystem-Specific Constants: HammerConstants, DriveConstants, AutoConstants.
+ * - Subsystem-Specific Constants: HammerConstants, DriveConstants,
+ * AutoConstants.
  */
 
 public final class Constants {
     // Drive Motor IDs
-    public static final int MOTOR_LEFT_1_ID = 0; // ID for left motor   
+    public static final int MOTOR_LEFT_1_ID = 0; // ID for left motor
     public static final int MOTOR_RIGHT_1_ID = 1; // ID for right motor
 
     // Controller IDs
     public static final int CONTROLLER_DRIVER_ID = 0; // Driver controller ID for drivetrain
     public static final int CONTROLLER_MANIPULATOR_ID = 1; // Manipulator controller ID for hammer
 
-    // Xbox Controller Axes 
-    public static final int LEFT_STICK_X = XboxController.Axis.kLeftX.value; //0;
+    // Xbox Controller Axes
+    public static final int LEFT_STICK_X = XboxController.Axis.kLeftX.value; // 0;
     public static final int LEFT_STICK_Y = XboxController.Axis.kLeftY.value; // 1;
-    public static final int RIGHT_STICK_X = XboxController.Axis.kRightX.value; //4
-    public static final int RIGHT_STICK_Y = XboxController.Axis.kRightY.value; //5
+    public static final int RIGHT_STICK_X = XboxController.Axis.kRightX.value; // 4
+    public static final int RIGHT_STICK_Y = XboxController.Axis.kRightY.value; // 5
 
     public static final int DIO_RED_LEDS = 0;
     public static final int DIO_BLUE_LEDS = 1;
-    
+
     // Sweeper IDs
     public static final int SWEEPER_MOTOR_ID = 2;
     public static final int SWEEPER_LIMIT_SWITCH_ID = 0;
@@ -63,6 +68,12 @@ public final class Constants {
         public static final int HammerCANID = 21; // CAN ID for the hammer motor controller
         public static final double VoltageFactor = 0.5; // Adjust this factor based on testing
     }
+
+    public enum NeoPixelColors {
+        BLUE,
+        RED,
+        GREEN
+    }
+
+    public static final NeoPixelColors TEAM_COLOR = NeoPixelColors.GREEN;
 }
-
-

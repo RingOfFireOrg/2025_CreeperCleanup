@@ -48,12 +48,6 @@ public class RobotContainer {
     private final HammerSubsystem m_hammer = new HammerSubsystem(
             new HammerInterfaceReal(Constants.HammerConstants.kMotorPWMPort));
 
-    private enum NeoPixelColors {
-        BLUE,
-        RED,
-        GREEN
-    }
-
     private final DigitalOutput dioPin0 = new DigitalOutput(0);
     private final DigitalOutput dioPin1 = new DigitalOutput(1);
 
@@ -61,7 +55,7 @@ public class RobotContainer {
      * The container for the robot. Contains subsystems, OI devices, and commands.
      */
     public RobotContainer() {
-        setNeoPixelColor(NeoPixelColors.GREEN);
+        setNeoPixelColor();
         configureBindings();
         driveTrain.setDefaultCommand(
                 new TankDriveCommand(driveTrain, driverController));
@@ -80,9 +74,9 @@ public class RobotContainer {
     }
 
     /** Set color for NeoPixels */
-    private void setNeoPixelColor(NeoPixelColors color) {
+    private void setNeoPixelColor() {
 
-        switch (color) {
+        switch (Constants.TEAM_COLOR) {
             case BLUE:
                 dioPin0.set(false);
                 dioPin1.set(true);
@@ -98,21 +92,6 @@ public class RobotContainer {
         }
     }
 
-    // ManipulatorController.a().whileTrue(new HammerSwingForwardCommand(m_hammer));
-    // ManipulatorController.b().whileTrue(new
-    // HammerSwingBackwardCommand(m_hammer));
-
-    /*
-     * private void configureBindings() {
-     * m_hammer.setDefaultCommand(
-     * new RunCommand(
-     * () -> m_hammer.setSpeed(-ManipulatorController.getLeftY()) // negate to make
-     * up=forward
-     * )
-     * );
-     * 
-     * }
-     */
     public double GetDriverRawAxis(int axis) {
         return driverController.getRawAxis(axis);
     }
