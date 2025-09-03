@@ -1,4 +1,19 @@
+// Copyright (c) FIRST and other WPILib contributors.
+// Open Source Software; you can modify and/or share it under the terms of
+// the WPILib BSD license file in the root directory of this project.
 
+/*** 
+ * The HammerInterfaceReal implements the functions defined in the contract for interacting 
+ * with the hammer hardware.
+ * It provides methods for controlling the hammer and updating its inputs.
+ *
+ * Key Responsibilities:
+ * - Implements methods for controlling the hammer (e.g., setVoltage, swingForward, swingBackward, stop).
+ * - 
+ * Key Components:
+ * - HammerInterfaceInputs: Stores position, velocity, applied voltage, and current.
+ * - Methods: setVoltage, swingForward, swingBackward, stop.
+*/
 
 package frc.robot.subsystems;
 
