@@ -75,5 +75,5 @@ public final class Constants {
         GREEN
     }
 
-    public static final NeoPixelColors TEAM_COLOR = NeoPixelColors.GREEN;
+    public static final NeoPixelColors TEAM_COLOR = NeoPixelColors.RED;
 }
