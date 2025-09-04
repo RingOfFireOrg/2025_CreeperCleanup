@@ -39,7 +39,7 @@ import frc.robot.subsystems.HammerSubsystem;
  * subsystems, commands, and trigger mappings) should be declared here.
  */
 public class RobotContainer {
-    private final XboxController driverController = new XboxController(0);
+    private final XboxController driverController = new XboxController(Constants.CONTROLLER_DRIVER_ID);
     // private final CommandXboxController ManipulatorController = new
     // CommandXboxController(Constants.CONTROLLER_MANIPULATOR_ID);
     private final XboxController ManipulatorController = new XboxController(Constants.CONTROLLER_MANIPULATOR_ID);
