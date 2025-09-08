@@ -40,12 +40,10 @@ import frc.robot.subsystems.HammerSubsystem;
  */
 public class RobotContainer {
     private final XboxController driverController = new XboxController(Constants.CONTROLLER_DRIVER_ID);
-    // private final CommandXboxController ManipulatorController = new
-    // CommandXboxController(Constants.CONTROLLER_MANIPULATOR_ID);
     private final XboxController ManipulatorController = new XboxController(Constants.CONTROLLER_MANIPULATOR_ID);
 
     private final DriveTrainSubSystem driveTrain = new DriveTrainSubSystem();
-    private final HammerSubsystem m_hammer = new HammerSubsystem(
+    private final HammerSubsystem hammer = new HammerSubsystem(
             new HammerInterfaceReal(Constants.HammerConstants.kMotorPWMPort));
 
     private final DigitalOutput dioPin0 = new DigitalOutput(0);
@@ -63,12 +61,13 @@ public class RobotContainer {
 
     private void configureBindings() {
         // Example: Run hammer with joystick
-        m_hammer.setDefaultCommand(
+        hammer.setDefaultCommand(
                 new HammerMoveCommand(
-                        m_hammer,
+                        hammer,
                         () -> {
+                            // {0to1} - {0to1} = {-1to1}
                             double xAxis = ManipulatorController.getLeftTriggerAxis()
-                                    - ManipulatorController.getRightTriggerAxis(); // {0to1} - {0to1} = {-1to1}
+                                    - ManipulatorController.getRightTriggerAxis();
                             return xAxis * Constants.HammerConstants.kMaxVoltage;
                         }));
     }
@@ -98,11 +97,6 @@ public class RobotContainer {
 
     public double GetManipulatorRawAxis(int axis) {
         return ManipulatorController.getRawAxis(axis);
-    }
-
-    // this needs a real implementation using a DIO on switch - rmackie
-    public boolean getSweeperLimitSwitchValue() {
-        return false;
     }
 
     public Command getAutonomousCommand() {
