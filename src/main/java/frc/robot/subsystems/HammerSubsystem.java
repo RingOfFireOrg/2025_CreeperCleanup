@@ -23,7 +23,6 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-//import frc.robot.subsystems.HammerInterface;
 import frc.robot.subsystems.HammerInterface.HammerInterfaceInputs;
 
 public class HammerSubsystem extends SubsystemBase {
@@ -53,16 +52,16 @@ public class HammerSubsystem extends SubsystemBase {
     }
 
     public void swingForward() {
-      io.swingForward();
-    }   
+        io.swingForward();
+    }
 
     public void swingBackward() {
         io.swingBackward();
-      }   
+    }
 
     public void stop() {
         io.stop();
-      }  
+    }
 
     public void setSpeed(double speed) {
         io.setSpeed(speed);
