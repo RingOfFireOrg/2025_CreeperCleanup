@@ -21,7 +21,7 @@ import edu.wpi.first.wpilibj.XboxController;
  * Key Components:
  * - Motor IDs: MOTOR_LEFT_1_ID, MOTOR_RIGHT_1_ID.
  * - Controller IDs: CONTROLLER_DRIVER_ID, CONTROLLER_MANIPULATOR_ID.
- * - Axis Mappings: LEFT_STICK_X, LEFT_STICK_Y, RIGHT_STICK_X, RIGHT_STICK_Y.
+ * - Axis Mappings: LEFT_STICK_Y, RIGHT_STICK_Y.
  * - Subsystem-Specific Constants: HammerConstants, DriveConstants,
  * AutoConstants.
  */
@@ -36,27 +36,12 @@ public final class Constants {
     public static final int CONTROLLER_MANIPULATOR_ID = 1; // Manipulator controller ID for hammer
 
     // Xbox Controller Axes
-    public static final int LEFT_STICK_X = XboxController.Axis.kLeftX.value; // 0;
     public static final int LEFT_STICK_Y = XboxController.Axis.kLeftY.value; // 1;
-    public static final int RIGHT_STICK_X = XboxController.Axis.kRightX.value; // 4
     public static final int RIGHT_STICK_Y = XboxController.Axis.kRightY.value; // 5
-
-    public static final int DIO_RED_LEDS = 0;
-    public static final int DIO_BLUE_LEDS = 1;
-
-    // Sweeper IDs
-    public static final int SWEEPER_MOTOR_ID = 2;
-    public static final int SWEEPER_LIMIT_SWITCH_ID = 0;
 
     // Add separate inner classes for subsystem-specific constants
     public static final class DriveConstants {
         public static final double SPEED_FACTOR = 0.9;
-    }
-
-    // Add autonomous constants
-    public static final class AutoConstants {
-        public static final double AUTO_SPEED = 0.5;
-        public static final double AUTO_ROTATION = 0.5;
     }
 
     // Hammer constants
