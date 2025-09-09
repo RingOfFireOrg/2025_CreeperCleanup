@@ -49,9 +49,7 @@ public class RobotContainer {
     private final DigitalOutput dioPin0 = new DigitalOutput(0);
     private final DigitalOutput dioPin1 = new DigitalOutput(1);
 
-    /**
-     * The container for the robot. Contains subsystems, OI devices, and commands.
-     */
+    /** The container for the robot. Contains subsystems, OI devices, and commands.  */
     public RobotContainer() {
         setNeoPixelColor();
         configureBindings();
