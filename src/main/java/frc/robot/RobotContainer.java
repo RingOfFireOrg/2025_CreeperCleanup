@@ -66,8 +66,8 @@ public class RobotContainer {
                         hammer,
                         () -> {
                             // {0to1} - {0to1} = {-1to1}
-                            double xAxis = ManipulatorController.getLeftTriggerAxis()
-                                    - ManipulatorController.getRightTriggerAxis();
+                            double xAxis = ManipulatorController.getRightTriggerAxis()
+                                    - ManipulatorController.getLeftTriggerAxis();
                             return xAxis * Constants.HammerConstants.kMaxVoltage;
                         }));
     }

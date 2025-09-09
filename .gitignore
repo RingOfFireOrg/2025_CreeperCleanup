@@ -188,3 +188,4 @@ compile_commands.json
 
 # Gemini project settings
 .gemini/*
+reference/*
