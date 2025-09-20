@@ -54,6 +54,11 @@ public final class Constants {
         public static final double VoltageFactor = 0.5; // Adjust this factor based on testing
     }
 
+    //grabber constants
+    public static final class GrabberConstants {
+        public static final int kMotorPWMPort = 1; // CHANGE THIS TO ACTUAL VALUE
+    }
+
     public enum NeoPixelColors {
         BLUE,
         RED,
