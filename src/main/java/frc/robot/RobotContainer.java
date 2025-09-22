@@ -26,6 +26,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.commands.HammerMoveCommand;
 import frc.robot.commands.TankDriveCommand;
 import frc.robot.subsystems.DriveTrainSubSystem;
+import frc.robot.subsystems.GrabberInterfaceReal;
 import frc.robot.subsystems.HammerInterfaceReal;
 import frc.robot.subsystems.HammerSubsystem;
 import frc.robot.subsystems.CreeperGrabberSubsystem;
@@ -43,6 +44,8 @@ public class RobotContainer {
     private final DriveTrainSubSystem driveTrain = new DriveTrainSubSystem();
     private final HammerSubsystem hammer = new HammerSubsystem(
             new HammerInterfaceReal(Constants.HammerConstants.kMotorPWMPort));
+    private final CreeperGrabberSubsystem grabber = new CreeperGrabberSubsystem(
+            new GrabberInterfaceReal(Constants.GrabberConstants.kMotorPWMPort));
     
 
     private final DigitalOutput dioPin0 = new DigitalOutput(0);
@@ -67,6 +70,9 @@ public class RobotContainer {
                                     - ManipulatorController.getLeftTriggerAxis();
                             return xAxis * Constants.HammerConstants.kMaxVoltage;
                         }));
+        grabber.setDefaultComand(
+                
+        )
     }
 
     /** Set color for NeoPixels */

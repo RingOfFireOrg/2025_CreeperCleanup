@@ -57,6 +57,13 @@ public final class Constants {
     //grabber constants
     public static final class GrabberConstants {
         public static final int kMotorPWMPort = 1; // CHANGE THIS TO ACTUAL VALUE
+        public static final int PivotCANID = 0; //CHANGE TO ACTUAL VALUE
+        public static final int LeftCANID = 0; //CHANGE TO ACTUAL VALUE
+        public static final int RightCANID = 0; //CHANGE TO ACTUAL VALUE
+        public static final double VoltageFactorPivot = 0.5;//CHANGE AS NEEDED
+        public static final double VoltageFactorWheels = 1;//CHANGE AS NEEDED
+
+
     }
 
     public enum NeoPixelColors {

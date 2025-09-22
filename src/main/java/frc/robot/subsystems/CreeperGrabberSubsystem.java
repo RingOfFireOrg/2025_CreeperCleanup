@@ -23,24 +23,29 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.subsystems.CreeperInterface.CreeperInterfaceInputs;
+import frc.robot.subsystems.GrabberInterface.CreeperInterfaceInputs;
 
 public class CreeperGrabberSubsystem extends SubsystemBase {
-    private final CreeperInterface io;
+    private final GrabberInterface io;
     private final CreeperInterfaceInputs inputs = new CreeperInterfaceInputs();
 
-    public CreeperGrabberSubsystem(CreeperInterface io) {
+    public CreeperGrabberSubsystem(GrabberInterface io) {
         this.io = io;
     }
 
     @Override
     public void periodic() {
         io.updateInputs(inputs);
-        SmartDashboard.putNumber("Hammer/Voltage", inputs.appliedVolts);
+        SmartDashboard.putNumber("Pivot/Voltage", inputs.appliedPivotVolts);
+        SmartDashboard.putNumber("Wheels/Voltage", inputs.appliedWheelVolts);
     }
 
-    public void runVoltage(double volts) {
-        io.setVoltage(volts);
+    public void runPivotVoltage(double volts) {
+        io.setPivotVoltage(volts);
+    }
+
+    public void runWheelsVoltage(double volts) {
+        io.setWheelsVoltage(volts);
     }
 
     public double getPosition() {
@@ -48,7 +53,7 @@ public class CreeperGrabberSubsystem extends SubsystemBase {
     }
 
     public double getVelocity() {
-        return inputs.velocityDegPerSec;
+        return inputs.pivotVelocityDegPerSec;
     }
 
     public void moveUp() {
@@ -65,6 +70,14 @@ public class CreeperGrabberSubsystem extends SubsystemBase {
 
     public void moveDown() {
         io.moveDown();
+    }
+
+    public void stopWheels() {
+        io.stopWheels();
+    }
+
+    public void stopPivot() {
+        io.stopPivot();
     }
 
     public void stop() {
