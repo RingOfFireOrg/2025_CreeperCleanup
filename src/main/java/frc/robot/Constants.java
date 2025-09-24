@@ -56,6 +56,7 @@ public final class Constants {
 
     //grabber constants
     public static final class GrabberConstants {
+        public static final double kMaxVoltage = 12.0;
         public static final int kMotorPWMPort = 1; // CHANGE THIS TO ACTUAL VALUE
         public static final int PivotCANID = 0; //CHANGE TO ACTUAL VALUE
         public static final int LeftCANID = 0; //CHANGE TO ACTUAL VALUE
