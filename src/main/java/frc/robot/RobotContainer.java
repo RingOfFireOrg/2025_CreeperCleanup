@@ -60,10 +60,20 @@ public class RobotContainer {
                 new HammerMoveCommand(
                         hammer,
                         () -> {
-                            // {0to1} - {0to1} = {-1to1}
+                            double out = 0.0;
+
+                            if (ManipulatorController.getRightBumper()) {
+                                out =  +Constants.HammerConstants.kMaxVoltage;
+                            } else if(ManipulatorController.getLeftBumper()){
+                                out = -Constants.HammerConstants.kMaxVoltage;
+                            } else {
+                                out = 0.0;
+                            }
+                            return out;
+                            /*{0to1} - {0to1} = {-1to1}
                             double xAxis = ManipulatorController.getRightTriggerAxis()
                                     - ManipulatorController.getLeftTriggerAxis();
-                            return xAxis * Constants.HammerConstants.kMaxVoltage;
+                            return xAxis * Constants.HammerConstants.kMaxVoltage; */ 
                         }));
     }
 
