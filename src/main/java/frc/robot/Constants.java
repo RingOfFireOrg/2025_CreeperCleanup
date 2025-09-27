@@ -51,7 +51,7 @@ public final class Constants {
         public static final double MAX_SPEED = 0.5;
         public static final double MIN_SPEED = -0.5;
         public static final int HammerCANID = 21; // CAN ID for the hammer motor controller
-        public static final double VoltageFactor = 0.5; // Adjust this factor based on testing
+        public static final double VoltageFactor = 0.75; // Adjust this factor based on testing
     }
 
     public enum NeoPixelColors {
