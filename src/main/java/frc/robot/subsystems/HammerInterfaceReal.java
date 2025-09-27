@@ -59,11 +59,11 @@ public class HammerInterfaceReal implements HammerInterface {
 
     @Override
     public void swingForward() {
-        motor.set(0.2); //Half speed forward
+        motor.set(0.53); //Half speed forward
     }
 
     public void swingBackward() {
-        motor.set(-0.2); // Half speed reverse
+        motor.set(-0.1); // Half speed reverse
     }
 
     public void setSpeed(double speed) {
