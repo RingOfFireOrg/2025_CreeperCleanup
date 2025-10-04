@@ -53,16 +53,8 @@ public final class Constants {
         public static final double VoltageFactor = 0.5; // Adjust this factor based on testing
     }
 
-    public static class Mechanism1Constants {
+    public static class ClamperConstants {
         public static final int kMotorCanId = 2;
-        
-        public static final double kDefaultSpeed = 0.5;
-        public static final double kMaxSpeed = 1.0;
-        public static final double kMinSpeed = -1.0;
-    }
-      
-    public static class Mechanism2Constants {
-        public static final int kMotorCanId = 3;
         
         public static final double kDefaultSpeed = 0.5;
         public static final double kMaxSpeed = 1.0;

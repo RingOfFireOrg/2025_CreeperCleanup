@@ -5,13 +5,13 @@ import com.revrobotics.spark.SparkLowLevel.MotorType;
 import com.revrobotics.spark.config.SparkMaxConfig;
 import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Constants.Mechanism1Constants;
+import frc.robot.Constants.ClamperConstants;
 
 public class Clamper extends SubsystemBase {
   private final SparkMax m_motor;
 
   public Clamper() {
-    m_motor = new SparkMax(Mechanism1Constants.kMotorCanId, MotorType.kBrushless);
+    m_motor = new SparkMax(ClamperConstants.kMotorCanId, MotorType.kBrushless);
     
     // Configure SparkMax using new config API
     SparkMaxConfig config = new SparkMaxConfig();
@@ -33,8 +33,8 @@ public class Clamper extends SubsystemBase {
    */
   public void run(double speed) {
     // Clamp speed to valid range
-    speed = Math.max(Mechanism1Constants.kMinSpeed, 
-                     Math.min(Mechanism1Constants.kMaxSpeed, speed));
+    speed = Math.max(ClamperConstants.kMinSpeed, 
+                     Math.min(ClamperConstants.kMaxSpeed, speed));
     m_motor.set(speed);
   }
 
