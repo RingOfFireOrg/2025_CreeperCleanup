@@ -7,10 +7,10 @@ import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.ClamperConstants;
 
-public class Clamper extends SubsystemBase {
+public class ClamperSubsystem extends SubsystemBase {
   private final SparkMax m_motor;
 
-  public Clamper() {
+  public ClamperSubsystem() {
     m_motor = new SparkMax(ClamperConstants.kMotorCanId, MotorType.kBrushless);
     
     // Configure SparkMax using new config API

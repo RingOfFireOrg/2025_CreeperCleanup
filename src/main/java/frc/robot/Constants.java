@@ -54,7 +54,7 @@ public final class Constants {
     }
 
     public static class ClamperConstants {
-        public static final int kMotorCanId = 2;
+        public static final int kMotorCanId = 5;
         
         public static final double kDefaultSpeed = 0.5;
         public static final double kMaxSpeed = 1.0;

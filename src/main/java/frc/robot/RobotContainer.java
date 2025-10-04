@@ -7,14 +7,14 @@
  * It initializes and manages the robot's subsystems, commands, and operator interface (OI) devices.
  *
  * Key Responsibilities:
- * - Declare and initialize subsystems (e.g., DriveTrainSubSystem, HammerSubsystem).
+ * - Declare and initialize subsystems (e.g., DriveTrainSubSystem, HammerSubsystem, ClamperSubsystem).
  * - Set default commands for subsystems.
  * - Configure input bindings (e.g., joystick buttons and axes).
  * - Provide the autonomous command to the Robot class.
  *
  * Key Components:
- * - Subsystems: DriveTrainSubSystem, HammerSubsystem.
- * - Commands: TankDriveCommand, HammerMoveCommand.
+ * - Subsystems: DriveTrainSubSystem, HammerSubsystem, ClamperSubsystem.
+ * - Commands: TankDriveCommand, HammerMoveCommand, RunClamperCommand.
  * - Input Devices: XboxController for driver and manipulator.
  */
 
@@ -23,7 +23,7 @@
  import edu.wpi.first.wpilibj.DigitalOutput;
  import edu.wpi.first.wpilibj.XboxController;
  import edu.wpi.first.wpilibj2.command.Command;
- //import frc.robot.Constants.*;
+ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
  import frc.robot.commands.*;
  import frc.robot.subsystems.*;
  
@@ -39,6 +39,7 @@
  
      private final DriveTrainSubSystem driveTrain = new DriveTrainSubSystem();
      private final HammerSubsystem hammer = new HammerSubsystem();
+     private final ClamperSubsystem clamper = new ClamperSubsystem();
  
      private final DigitalOutput dioPin0 = new DigitalOutput(0);
      private final DigitalOutput dioPin1 = new DigitalOutput(1);
@@ -62,6 +63,15 @@
                                      - manipulatorController.getLeftTriggerAxis();
                              return triggerInput * Constants.HammerConstants.kMaxVoltage;
                          }));
+ 
+         // Clamper controls
+         // A button - spin forward
+         new JoystickButton(manipulatorController, XboxController.Button.kA.value)
+             .whileTrue(new RunClamperCommand(clamper, Constants.ClamperConstants.kDefaultSpeed));
+         
+         // B button - spin backward
+         new JoystickButton(manipulatorController, XboxController.Button.kB.value)
+             .whileTrue(new RunClamperCommand(clamper, -Constants.ClamperConstants.kDefaultSpeed));
      }
  
      /** Set color for NeoPixels */

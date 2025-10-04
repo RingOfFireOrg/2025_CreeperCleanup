@@ -1,10 +1,10 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.subsystems.Clamper;
+import frc.robot.subsystems.ClamperSubsystem;
 
 public class RunClamperCommand extends Command {
-  private final Clamper m_subsystem;
+  private final ClamperSubsystem m_subsystem;
   private final double m_speed;
 
   /**
@@ -12,7 +12,7 @@ public class RunClamperCommand extends Command {
    * @param subsystem The mechanism subsystem to use
    * @param speed Speed to run the mechanism (-1.0 to 1.0)
    */
-  public RunClamperCommand(Clamper subsystem, double speed) {
+  public RunClamperCommand(ClamperSubsystem subsystem, double speed) {
     m_subsystem = subsystem;
     m_speed = speed;
     
