@@ -4,14 +4,18 @@ import com.revrobotics.spark.SparkMax;
 import com.revrobotics.spark.SparkLowLevel.MotorType;
 import com.revrobotics.spark.config.SparkMaxConfig;
 import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
+import com.revrobotics.RelativeEncoder;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constants.ClamperConstants;
 
 public class ClamperSubsystem extends SubsystemBase {
   private final SparkMax m_motor;
+  private final RelativeEncoder m_encoder;
 
   public ClamperSubsystem() {
     m_motor = new SparkMax(ClamperConstants.kMotorCanId, MotorType.kBrushless);
+    m_encoder = m_motor.getEncoder();
     
     // Configure SparkMax using new config API
     SparkMaxConfig config = new SparkMaxConfig();
@@ -19,12 +23,6 @@ public class ClamperSubsystem extends SubsystemBase {
           .smartCurrentLimit(40);
     
     m_motor.configure(config, SparkMax.ResetMode.kResetSafeParameters, SparkMax.PersistMode.kPersistParameters);
-    
-    // Set current limits to protect motor
-    //m_motor.setSmartCurrentLimit(40);
-    
-    // Burn settings to flash
-    //m_motor.burnFlash();
   }
 
   /**
@@ -69,10 +67,27 @@ public class ClamperSubsystem extends SubsystemBase {
     return m_motor.getOutputCurrent();
   }
 
+  /**
+   * Get the encoder position in rotations
+   * @return Position in rotations
+   */
+  public double getPosition() {
+    return m_encoder.getPosition();
+  }
+
+  /**
+   * Reset the encoder position to zero
+   */
+  public void resetEncoder() {
+    m_encoder.setPosition(0);
+  }
+
   @Override
   public void periodic() {
-    // This method will be called once per scheduler run
-    // Add telemetry here if needed
+    // Update telemetry
+    SmartDashboard.putNumber("Clamper/Position", getPosition());
+    SmartDashboard.putNumber("Clamper/Current", getMotorCurrent());
+    SmartDashboard.putNumber("Clamper/Temperature", getMotorTemperature());
   }
 
   @Override

@@ -24,7 +24,8 @@
  import edu.wpi.first.wpilibj.XboxController;
  import edu.wpi.first.wpilibj2.command.Command;
  import edu.wpi.first.wpilibj2.command.button.JoystickButton;
- import frc.robot.commands.*;
+import frc.robot.Constants.ClamperConstants;
+import frc.robot.commands.*;
  import frc.robot.subsystems.*;
  
  /**
@@ -66,12 +67,16 @@
  
          // Clamper controls
          // A button - spin forward
-         new JoystickButton(manipulatorController, XboxController.Button.kA.value)
-             .whileTrue(new RunClamperCommand(clamper, Constants.ClamperConstants.kDefaultSpeed));
-         
-         // B button - spin backward
-         new JoystickButton(manipulatorController, XboxController.Button.kB.value)
-             .whileTrue(new RunClamperCommand(clamper, -Constants.ClamperConstants.kDefaultSpeed));
+        new JoystickButton(manipulatorController, XboxController.Button.kA.value).onTrue(new RotateClamperCommand(
+            clamper, 
+            ClamperConstants.kRotationsPerPress, 
+            ClamperConstants.kRotationSpeed));
+  
+        // B button: Rotate backward
+        new JoystickButton(manipulatorController, XboxController.Button.kB.value).onTrue(new RotateClamperCommand(
+            clamper, 
+            -ClamperConstants.kRotationsPerPress, 
+            ClamperConstants.kRotationSpeed));
      }
  
      /** Set color for NeoPixels */

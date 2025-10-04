@@ -59,6 +59,9 @@ public final class Constants {
         public static final double kDefaultSpeed = 0.5;
         public static final double kMaxSpeed = 1.0;
         public static final double kMinSpeed = -1.0;
+
+        public static final double kRotationSpeed = 0.3; // Speed for rotation commands
+        public static final double kRotationsPerPress = 2.0;
     }
 
     public enum NeoPixelColors {
