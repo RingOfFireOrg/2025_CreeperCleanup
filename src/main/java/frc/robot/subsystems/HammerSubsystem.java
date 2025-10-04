@@ -4,67 +4,89 @@
 
 /**
  * The HammerSubsystem class represents the hammer mechanism of the robot.
- * It interacts with the hardware through the HammerInterface and provides methods for controlling the hammer.
+ * It controls a SparkMax motor controller for swinging the hammer mechanism.
  *
  * Key Responsibilities:
- * - Update and monitor hammer inputs (e.g., position, velocity, applied voltage).
- * - Provide methods to control the hammer (e.g., runVoltage, swingForward, swingBackward, stop).
+ * - Control the hammer motor using voltage or speed control
+ * - Provide methods to swing forward, backward, and stop
+ * - Monitor motor telemetry
  *
  * Key Components:
- * - Interface: HammerInterface for hardware abstraction.
- * - Inputs: HammerInterfaceInputs for storing sensor data.
- * - Methods: runVoltage, swingForward, swingBackward, stop.
- *
- * Lifecycle:
- * - `periodic()`: Called periodically by the WPILib scheduler to update inputs and send data to the dashboard.
+ * - SparkMax motor controller configured in brake mode
+ * - Voltage and speed control methods
+ * - SmartDashboard telemetry
  */
 
-package frc.robot.subsystems;
+ package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.subsystems.HammerInterface.HammerInterfaceInputs;
-
-public class HammerSubsystem extends SubsystemBase {
-    private final HammerInterface io;
-    private final HammerInterfaceInputs inputs = new HammerInterfaceInputs();
-
-    public HammerSubsystem(HammerInterface io) {
-        this.io = io;
-    }
-
-    @Override
-    public void periodic() {
-        io.updateInputs(inputs);
-        SmartDashboard.putNumber("Hammer/Voltage", inputs.appliedVolts);
-    }
-
-    public void runVoltage(double volts) {
-        io.setVoltage(volts);
-    }
-
-    public double getPosition() {
-        return inputs.positionDeg;
-    }
-
-    public double getVelocity() {
-        return inputs.velocityDegPerSec;
-    }
-
-    public void swingForward() {
-        io.swingForward();
-    }
-
-    public void swingBackward() {
-        io.swingBackward();
-    }
-
-    public void stop() {
-        io.stop();
-    }
-
-    public void setSpeed(double speed) {
-        io.setSpeed(speed);
-    }
-
-}
+ import com.revrobotics.spark.SparkMax;
+ import com.revrobotics.spark.SparkBase.ResetMode;
+ import com.revrobotics.spark.SparkBase.PersistMode;
+ import com.revrobotics.spark.SparkLowLevel.MotorType;
+ import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
+ import com.revrobotics.spark.config.SparkMaxConfig;
+ import edu.wpi.first.wpilibj2.command.SubsystemBase;
+ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+ import frc.robot.Constants.HammerConstants;
+ 
+ public class HammerSubsystem extends SubsystemBase {
+     private final SparkMax motor;
+     private double lastAppliedVolts = 0.0;
+ 
+     public HammerSubsystem() {
+         motor = new SparkMax(HammerConstants.HammerCANID, MotorType.kBrushless);
+         
+         SparkMaxConfig config = new SparkMaxConfig();
+         config.idleMode(IdleMode.kBrake)
+               .smartCurrentLimit(25);
+         
+         motor.configure(config, ResetMode.kResetSafeParameters, PersistMode.kNoPersistParameters);
+     }
+ 
+     @Override
+     public void periodic() {
+         // Update telemetry
+         SmartDashboard.putNumber("Hammer/Applied Voltage", lastAppliedVolts);
+         SmartDashboard.putNumber("Hammer/Motor Current", motor.getOutputCurrent());
+         SmartDashboard.putNumber("Hammer/Motor Temperature", motor.getMotorTemperature());
+     }
+ 
+     /**
+      * Run the hammer at a specified voltage
+      * @param volts Voltage to apply (-12 to 12)
+      */
+     public void runVoltage(double volts) {
+         lastAppliedVolts = volts;
+         motor.setVoltage(volts * HammerConstants.VoltageFactor);
+     }
+ 
+     /**
+      * Swing the hammer forward at 20% speed
+      */
+     public void swingForward() {
+         motor.set(0.2);
+     }
+ 
+     /**
+      * Swing the hammer backward at 20% speed
+      */
+     public void swingBackward() {
+         motor.set(-0.2);
+     }
+ 
+     /**
+      * Set the hammer motor speed directly
+      * @param speed Motor speed (-1.0 to 1.0)
+      */
+     public void setSpeed(double speed) {
+         motor.set(speed);
+     }
+ 
+     /**
+      * Stop the hammer motor
+      */
+     public void stop() {
+         motor.set(0);
+         lastAppliedVolts = 0.0;
+     }
+ }
