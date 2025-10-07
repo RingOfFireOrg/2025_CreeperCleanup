@@ -44,30 +44,6 @@ public class ClamperSubsystem extends SubsystemBase {
   }
 
   /**
-   * Get the current motor output
-   * @return Current motor output (-1.0 to 1.0)
-   */
-  public double getMotorOutput() {
-    return m_motor.get();
-  }
-
-  /**
-   * Get the motor temperature
-   * @return Motor temperature in Celsius
-   */
-  public double getMotorTemperature() {
-    return m_motor.getMotorTemperature();
-  }
-
-  /**
-   * Get the motor current
-   * @return Motor current in Amps
-   */
-  public double getMotorCurrent() {
-    return m_motor.getOutputCurrent();
-  }
-
-  /**
    * Get the encoder position in rotations
    * @return Position in rotations
    */
@@ -86,8 +62,6 @@ public class ClamperSubsystem extends SubsystemBase {
   public void periodic() {
     // Update telemetry
     SmartDashboard.putNumber("Clamper/Position", getPosition());
-    SmartDashboard.putNumber("Clamper/Current", getMotorCurrent());
-    SmartDashboard.putNumber("Clamper/Temperature", getMotorTemperature());
   }
 
   @Override

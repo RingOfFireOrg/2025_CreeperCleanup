@@ -61,20 +61,6 @@
      }
  
      /**
-      * Swing the hammer forward at 20% speed
-      */
-     public void swingForward() {
-         motor.set(0.2);
-     }
- 
-     /**
-      * Swing the hammer backward at 20% speed
-      */
-     public void swingBackward() {
-         motor.set(-0.2);
-     }
- 
-     /**
       * Set the hammer motor speed directly
       * @param speed Motor speed (-1.0 to 1.0)
       */
