@@ -7,13 +7,13 @@
  * It controls a SparkMax motor controller for swinging the hammer mechanism.
  *
  * Key Responsibilities:
- * - Control the hammer motor using voltage or speed control
+ * - Control the hammer motor using speed control
  * - Provide methods to swing forward, backward, and stop
  * - Monitor motor telemetry
  *
  * Key Components:
  * - SparkMax motor controller configured in brake mode
- * - Voltage and speed control methods
+ * - Speed control methods
  * - SmartDashboard telemetry
  */
 
@@ -31,7 +31,6 @@
  
  public class HammerSubsystem extends SubsystemBase {
      private final SparkMax motor;
-     private double lastAppliedVolts = 0.0;
  
      public HammerSubsystem() {
          motor = new SparkMax(HammerConstants.HammerCANID, MotorType.kBrushless);
@@ -46,18 +45,9 @@
      @Override
      public void periodic() {
          // Update telemetry
-         SmartDashboard.putNumber("Hammer/Applied Voltage", lastAppliedVolts);
+         SmartDashboard.putNumber("Hammer/Motor Speed", motor.get());
          SmartDashboard.putNumber("Hammer/Motor Current", motor.getOutputCurrent());
          SmartDashboard.putNumber("Hammer/Motor Temperature", motor.getMotorTemperature());
-     }
- 
-     /**
-      * Run the hammer at a specified voltage
-      * @param volts Voltage to apply (-12 to 12)
-      */
-     public void runVoltage(double volts) {
-         lastAppliedVolts = volts;
-         motor.setVoltage(volts * HammerConstants.VoltageFactor);
      }
  
      /**
@@ -65,6 +55,8 @@
       * @param speed Motor speed (-1.0 to 1.0)
       */
      public void setSpeed(double speed) {
+         // Clamp speed to valid range
+         speed = Math.max(-1.0, Math.min(1.0, speed));
          motor.set(speed);
      }
  
@@ -73,6 +65,13 @@
       */
      public void stop() {
          motor.set(0);
-         lastAppliedVolts = 0.0;
+     }
+ 
+     /**
+      * Get the current motor speed
+      * @return Current motor speed (-1.0 to 1.0)
+      */
+     public double getSpeed() {
+         return motor.get();
      }
  }

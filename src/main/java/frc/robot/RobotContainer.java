@@ -14,7 +14,7 @@
  *
  * Key Components:
  * - Subsystems: DriveTrainSubSystem, HammerSubsystem, ClamperSubsystem.
- * - Commands: TankDriveCommand, HammerMoveCommand, RunClamperCommand.
+ * - Commands: TankDriveCommand, HammerMoveCommand, RotateClamperCommand.
  * - Input Devices: XboxController for driver and manipulator.
  */
 
@@ -24,8 +24,9 @@
  import edu.wpi.first.wpilibj.XboxController;
  import edu.wpi.first.wpilibj2.command.Command;
  import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import frc.robot.Constants.ClamperConstants;
-import frc.robot.commands.*;
+ import frc.robot.Constants.ClamperConstants;
+ //import frc.robot.Constants.HammerConstants;
+ import frc.robot.commands.*;
  import frc.robot.subsystems.*;
  
  /**
@@ -62,21 +63,23 @@ import frc.robot.commands.*;
                              // {0to1} - {0to1} = {-1to1}
                              double triggerInput = manipulatorController.getRightTriggerAxis()
                                      - manipulatorController.getLeftTriggerAxis();
-                             return triggerInput * Constants.HammerConstants.kMaxVoltage;
+                             return triggerInput; // Returns -1.0 to 1.0, scaled in command
                          }));
  
          // Clamper controls
-         // A button - spin forward
-        new JoystickButton(manipulatorController, XboxController.Button.kA.value).onTrue(new RotateClamperCommand(
-            clamper, 
-            ClamperConstants.kRotationsPerPress, 
-            ClamperConstants.kRotationSpeed));
-  
-        // B button: Rotate backward
-        new JoystickButton(manipulatorController, XboxController.Button.kB.value).onTrue(new RotateClamperCommand(
-            clamper, 
-            -ClamperConstants.kRotationsPerPress, 
-            ClamperConstants.kRotationSpeed));
+         // A button: Rotate forward
+         new JoystickButton(manipulatorController, XboxController.Button.kA.value)
+             .onTrue(new ClamperMoveCommand(
+                 clamper, 
+                 ClamperConstants.kRotationsPerPress, 
+                 ClamperConstants.kRotationSpeed));
+   
+         // B button: Rotate backward
+         new JoystickButton(manipulatorController, XboxController.Button.kB.value)
+             .onTrue(new ClamperMoveCommand(
+                 clamper, 
+                 -ClamperConstants.kRotationsPerPress, 
+                 ClamperConstants.kRotationSpeed));
      }
  
      /** Set color for NeoPixels */

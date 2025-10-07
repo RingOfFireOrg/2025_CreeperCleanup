@@ -3,7 +3,7 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.ClamperSubsystem;
 
-public class RotateClamperCommand extends Command {
+public class ClamperMoveCommand extends Command {
   private final ClamperSubsystem m_subsystem;
   private final double m_rotations;
   private final double m_speed;
@@ -16,7 +16,7 @@ public class RotateClamperCommand extends Command {
    * @param rotations Number of rotations (positive or negative)
    * @param speed Speed to rotate at (0.0 to 1.0, direction determined by rotations sign)
    */
-  public RotateClamperCommand(ClamperSubsystem subsystem, double rotations, double speed) {
+  public ClamperMoveCommand(ClamperSubsystem subsystem, double rotations, double speed) {
     m_subsystem = subsystem;
     m_rotations = rotations;
     m_speed = Math.abs(speed); // Ensure speed is positive
