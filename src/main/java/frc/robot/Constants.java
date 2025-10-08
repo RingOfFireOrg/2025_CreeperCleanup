@@ -1,3 +1,4 @@
+
 // Copyright (c) FIRST and other WPILib contributors.
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
@@ -41,17 +42,26 @@ public final class Constants {
 
     // Add separate inner classes for subsystem-specific constants
     public static final class DriveConstants {
-        public static final double SPEED_FACTOR = 0.82;
+        public static final double SPEED_FACTOR = 0.72;
     }
 
     // Hammer constants
     public static final class HammerConstants {
-        public static final int kMotorPWMPort = 5; // Robot's PWM port on RoboRio
-        public static final double kMaxVoltage = 12.0;
-        public static final double MAX_SPEED = 0.5;
-        public static final double MIN_SPEED = -0.5;
         public static final int HammerCANID = 21; // CAN ID for the hammer motor controller
-        public static final double VoltageFactor = 0.5; // Adjust this factor based on testing
+        
+        public static final double kMaxSpeed = 0.7;
+        public static final double kDefaultSpeed = 0.5; // 15% speed for trigger control
+    }
+
+    public static class ClamperConstants {
+        public static final int kMotorCanId = 5;
+        
+        public static final double kDefaultSpeed = 0.5;
+        public static final double kMaxSpeed = 1.0;
+        public static final double kMinSpeed = -1.0;
+
+        public static final double kRotationSpeed = 0.3; // Speed for rotation commands
+        public static final double kRotationsPerPress = 2.0;
     }
 
     public enum NeoPixelColors {
