@@ -54,7 +54,7 @@ public class HammerInterfaceReal implements HammerInterface {
     @Override
     public void setVoltage(double volts) {
         lastAppliedVolts = volts;
-        motor.setVoltage(volts * HammerConstants.VoltageFactor);
+        motor.setVoltage(volts * HammerConstants.VoltageFactor*2);
     }
 
     @Override
