@@ -20,51 +20,44 @@
  */
 
 package frc.robot.subsystems;
-
+import com.revrobotics.spark.SparkMax;
+ import com.revrobotics.spark.SparkBase.ResetMode;
+ import com.revrobotics.spark.SparkBase.PersistMode;
+ import com.revrobotics.spark.SparkLowLevel.MotorType;
+ import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
+ import com.revrobotics.spark.config.SparkMaxConfig;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.subsystems.HammerInterface.HammerInterfaceInputs;
+import frc.robot.Constants.HammerConstants;
+
 
 public class HammerSubsystem extends SubsystemBase {
-    private final HammerInterface io;
-    private final HammerInterfaceInputs inputs = new HammerInterfaceInputs();
+    private final SparkMax motor;
 
-    public HammerSubsystem(HammerInterface io) {
-        this.io = io;
+    public HammerSubsystem() {
+        motor = new SparkMax(HammerConstants.HammerCANID, MotorType.kBrushless);
+        
+        SparkMaxConfig config = new SparkMaxConfig();
+        config.idleMode(IdleMode.kBrake).smartCurrentLimit(25);
+
+        motor.configure(config, ResetMode.kResetSafeParameters, PersistMode.kNoPersistParameters);
+
     }
 
     @Override
     public void periodic() {
-        io.updateInputs(inputs);
-        SmartDashboard.putNumber("Hammer/Voltage", inputs.appliedVolts);
-    }
-
-    public void runVoltage(double volts) {
-        io.setVoltage(volts);
-    }
-
-    public double getPosition() {
-        return inputs.positionDeg;
-    }
-
-    public double getVelocity() {
-        return inputs.velocityDegPerSec;
-    }
-
-    public void swingForward() {
-        io.swingForward();
-    }
-
-    public void swingBackward() {
-        io.swingBackward();
+      
     }
 
     public void stop() {
-        io.stop();
+        motor.set(0);
     }
-
+    
+    
     public void setSpeed(double speed) {
-        io.setSpeed(speed);
+       speed = Math.max(-1.0, Math.min(1.0, speed));
+       motor.set(speed);
+
     }
 
 }

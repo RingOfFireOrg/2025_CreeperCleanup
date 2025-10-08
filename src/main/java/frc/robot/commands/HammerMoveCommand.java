@@ -39,11 +39,11 @@ public class HammerMoveCommand extends Command {
 
     @Override
     public void execute() {
-        hammer.runVoltage(0.15 * voltageSupplier.getAsDouble());
+        hammer.setSpeed(0.15 * voltageSupplier.getAsDouble());
     }
 
     @Override
     public void end(boolean interrupted) {
-        hammer.runVoltage(0.0);
+        hammer.stop();
     }
 }
