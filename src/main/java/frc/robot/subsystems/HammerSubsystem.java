@@ -4,67 +4,74 @@
 
 /**
  * The HammerSubsystem class represents the hammer mechanism of the robot.
- * It interacts with the hardware through the HammerInterface and provides methods for controlling the hammer.
+ * It controls a SparkMax motor controller for swinging the hammer mechanism.
  *
  * Key Responsibilities:
- * - Update and monitor hammer inputs (e.g., position, velocity, applied voltage).
- * - Provide methods to control the hammer (e.g., runVoltage, swingForward, swingBackward, stop).
+ * - Control the hammer motor using speed control
+ * - Provide methods to swing forward, backward, and stop
+ * - Monitor motor telemetry
  *
  * Key Components:
- * - Interface: HammerInterface for hardware abstraction.
- * - Inputs: HammerInterfaceInputs for storing sensor data.
- * - Methods: runVoltage, swingForward, swingBackward, stop.
- *
- * Lifecycle:
- * - `periodic()`: Called periodically by the WPILib scheduler to update inputs and send data to the dashboard.
+ * - SparkMax motor controller configured in brake mode
+ * - Speed control methods
+ * - SmartDashboard telemetry
  */
 
-package frc.robot.subsystems;
+ package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.subsystems.HammerInterface.HammerInterfaceInputs;
-
-public class HammerSubsystem extends SubsystemBase {
-    private final HammerInterface io;
-    private final HammerInterfaceInputs inputs = new HammerInterfaceInputs();
-
-    public HammerSubsystem(HammerInterface io) {
-        this.io = io;
-    }
-
-    @Override
-    public void periodic() {
-        io.updateInputs(inputs);
-        SmartDashboard.putNumber("Hammer/Voltage", inputs.appliedVolts);
-    }
-
-    public void runVoltage(double volts) {
-        io.setVoltage(volts);
-    }
-
-    public double getPosition() {
-        return inputs.positionDeg;
-    }
-
-    public double getVelocity() {
-        return inputs.velocityDegPerSec;
-    }
-
-    public void swingForward() {
-        io.swingForward();
-    }
-
-    public void swingBackward() {
-        io.swingBackward();
-    }
-
-    public void stop() {
-        io.stop();
-    }
-
-    public void setSpeed(double speed) {
-        io.setSpeed(speed);
-    }
-
-}
+ import com.revrobotics.spark.SparkMax;
+ import com.revrobotics.spark.SparkBase.ResetMode;
+ import com.revrobotics.spark.SparkBase.PersistMode;
+ import com.revrobotics.spark.SparkLowLevel.MotorType;
+ import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
+ import com.revrobotics.spark.config.SparkMaxConfig;
+ import edu.wpi.first.wpilibj2.command.SubsystemBase;
+ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+ import frc.robot.Constants.HammerConstants;
+ 
+ public class HammerSubsystem extends SubsystemBase {
+     private final SparkMax motor;
+ 
+     public HammerSubsystem() {
+         motor = new SparkMax(HammerConstants.HammerCANID, MotorType.kBrushless);
+         
+         SparkMaxConfig config = new SparkMaxConfig();
+         config.idleMode(IdleMode.kBrake)
+               .smartCurrentLimit(25);
+         
+         motor.configure(config, ResetMode.kResetSafeParameters, PersistMode.kNoPersistParameters);
+     }
+ 
+     @Override
+     public void periodic() {
+         // Update telemetry
+         SmartDashboard.putNumber("Hammer/Motor Speed", motor.get());
+         SmartDashboard.putNumber("Hammer/Motor Current", motor.getOutputCurrent());
+         SmartDashboard.putNumber("Hammer/Motor Temperature", motor.getMotorTemperature());
+     }
+ 
+     /**
+      * Set the hammer motor speed directly
+      * @param speed Motor speed (-1.0 to 1.0)
+      */
+     public void setSpeed(double speed) {
+         // Clamp speed to valid range
+         speed = Math.max(-1.0, Math.min(1.0, speed));
+         motor.set(speed);
+     }
+ 
+     /**
+      * Stop the hammer motor
+      */
+     public void stop() {
+         motor.set(0);
+     }
+ 
+     /**
+      * Get the current motor speed
+      * @return Current motor speed (-1.0 to 1.0)
+      */
+     public double getSpeed() {
+         return motor.get();
+     }
+ }
