@@ -40,7 +40,7 @@
      @Override
      public void execute() {
          // Apply speed with scaling factor (15% of input)
-         hammer.setSpeed(0.15 * speedSupplier.getAsDouble());
+         hammer.setSpeed(0.25 * speedSupplier.getAsDouble());
      }
  
      @Override
