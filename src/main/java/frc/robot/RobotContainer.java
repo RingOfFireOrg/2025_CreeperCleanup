@@ -50,7 +50,7 @@
          configureBindings();
          driveTrain.setDefaultCommand(
                  new TankDriveCommand(driveTrain, driverController));
-     }
+         }
  
      private void configureBindings() {
          // Hammer control with triggers: right trigger = forward, left trigger = backward
@@ -61,11 +61,10 @@
                      return triggerInput;
                  })
              );
-             } else {
-                 hammer.stop();
-             }
+         } else {
+            hammer.stop();
          }
- 
+     }
  
      /** Set color for NeoPixels */
      private void setNeoPixelColor() {
