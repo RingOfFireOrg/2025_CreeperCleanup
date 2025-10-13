@@ -58,6 +58,11 @@
          // Clamp speed to valid range
          speed = Math.max(-1.0, Math.min(1.0, speed));
          motor.set(speed);
+         SmartDashboard.putNumber("encoder location", motor.getEncoder().getPosition());
+     }
+     
+     public void encoderReset() {
+         motor.getEncoder().setPosition(0);
      }
         
  
@@ -65,6 +70,11 @@
       * Stop the hammer motor
       */
      public void stop() {
+        SmartDashboard.putString("Hammer Status", "Stopping");
+        while ((motor.getEncoder().getPosition()%1) < 1 || (motor.getEncoder().getPosition()%1) > -1) {
+            motor.set(0.05);
+            SmartDashboard.putNumber("encoder location", motor.getEncoder().getPosition());
+        }
          motor.set(0);
      }
  
@@ -73,9 +83,6 @@
       * @return Current motor speed (-1.0 to 1.0)
       */
      public double getSpeed() {
-        while (motor.getEncoder().getPosition() < 0.75 || motor.getEncoder().getPosition() > 0.25) {
-            motor.set(0.15);
-        }
          return motor.get();
      }
  }

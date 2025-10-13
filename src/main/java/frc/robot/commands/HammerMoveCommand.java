@@ -35,6 +35,7 @@
      @Override
      public void initialize() {
          // Called when command starts
+         hammer.encoderReset();
      }
  
      @Override

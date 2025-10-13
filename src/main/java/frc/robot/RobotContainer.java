@@ -54,11 +54,17 @@
  
      private void configureBindings() {
          // Hammer control with triggers: right trigger = forward, left trigger = backward
-         hammer.setDefaultCommand(
-                 new HammerMoveCommand(hammer,() -> { double triggerInput = manipulatorController.getRightTriggerAxis()- manipulatorController.getLeftTriggerAxis();
-                    return triggerInput; 
-                }));
-                         }
+         if (manipulatorController.getRightTriggerAxis() != 0 || manipulatorController.getLeftTriggerAxis() != 0) {
+             hammer.setDefaultCommand(
+                 new HammerMoveCommand(hammer, () -> {
+                     double triggerInput = manipulatorController.getRightTriggerAxis() - manipulatorController.getLeftTriggerAxis();
+                     return triggerInput;
+                 })
+             );
+             } else {
+                 hammer.stop();
+             }
+         }
  
  
      /** Set color for NeoPixels */
