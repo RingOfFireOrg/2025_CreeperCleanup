@@ -42,7 +42,7 @@ public final class Constants {
 
     // Add separate inner classes for subsystem-specific constants
     public static final class DriveConstants {
-        public static final double SPEED_FACTOR = 0.72;
+        public static final double SPEED_FACTOR = 0.82;
     }
 
     // Hammer constants

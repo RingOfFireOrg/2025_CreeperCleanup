@@ -55,15 +55,9 @@
      private void configureBindings() {
          // Hammer control with triggers: right trigger = forward, left trigger = backward
          hammer.setDefaultCommand(
-                 new HammerMoveCommand(
-                         hammer,
-                         () -> {
-                             // {0to1} - {0to1} = {-1to1}
-                             double triggerInput = manipulatorController.getRightTriggerAxis()
-                                     - manipulatorController.getLeftTriggerAxis();
-                             return triggerInput; // Returns -1.0 to 1.0, scaled in command
-                                             }));
-                    
+                 new HammerMoveCommand(hammer,() -> { double triggerInput = manipulatorController.getRightTriggerAxis()- manipulatorController.getLeftTriggerAxis();
+                    return triggerInput; 
+                }));
                          }
  
  

@@ -59,6 +59,10 @@
          speed = Math.max(-1.0, Math.min(1.0, speed));
          motor.set(speed);
      }
+     public void reset(double pos) {
+        pos = motor.getAlternateEncoder().getPosition();
+        motor.getAlternateEncoder().setPosition(0);
+     }
  
      /**
       * Stop the hammer motor
