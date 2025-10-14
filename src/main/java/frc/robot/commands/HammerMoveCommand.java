@@ -18,7 +18,8 @@
 
  package frc.robot.commands;
 
- import edu.wpi.first.wpilibj2.command.Command;
+ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj2.command.Command;
  import frc.robot.subsystems.HammerSubsystem;
  import java.util.function.DoubleSupplier;
  
@@ -41,7 +42,17 @@
      @Override
      public void execute() {
          // Apply speed with scaling factor (15% of input)
-         hammer.setSpeed(0.25 * speedSupplier.getAsDouble());
+         if ((hammer.getEncoder() %1) < 0.2 || (hammer.getEncoder() %1) > 0.2){
+            if ((hammer.getEncoder() %1) < 0.2){
+                hammer.setSpeed(0.05);
+            } else if( (hammer.getEncoder() %1) > 0.2){
+                hammer.setSpeed(-0.05);
+            }
+         } else{
+            hammer.setSpeed(0.25 * speedSupplier.getAsDouble());
+            SmartDashboard.putNumber("encoder location", hammer.getEncoder()%1);
+         }
+         //hammer.stop();
      }
  
      @Override

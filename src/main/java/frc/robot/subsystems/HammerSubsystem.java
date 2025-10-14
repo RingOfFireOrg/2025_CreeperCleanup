@@ -64,6 +64,10 @@
      public void encoderReset() {
          motor.getEncoder().setPosition(0);
      }
+
+     public double getEncoder() {
+        return motor.getEncoder().getPosition();
+     }
         
  
      /**
@@ -72,10 +76,13 @@
      public void stop() {
         SmartDashboard.putString("Hammer Status", "Stopping");
         while ((motor.getEncoder().getPosition()%1) < 1 || (motor.getEncoder().getPosition()%1) > -1) {
-            motor.set(0.05);
+            if ((motor.getEncoder().getPosition()%1) >= -1) {
+                motor.set(0.05);
+            } else if ((motor.getEncoder().getPosition()%1) <= 1) {
+                motor.set(-0.05);
+            }
             SmartDashboard.putNumber("encoder location", motor.getEncoder().getPosition());
         }
-         motor.set(0);
      }
  
      /**

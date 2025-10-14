@@ -22,7 +22,8 @@
 
  import edu.wpi.first.wpilibj.DigitalOutput;
  import edu.wpi.first.wpilibj.XboxController;
- import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj2.command.Command;
  //import edu.wpi.first.wpilibj2.command.button.JoystickButton;
  //import frc.robot.Constants.HammerConstants;
  import frc.robot.commands.*;
@@ -54,16 +55,18 @@
  
      private void configureBindings() {
          // Hammer control with triggers: right trigger = forward, left trigger = backward
-         if (manipulatorController.getRightTriggerAxis() != 0 || manipulatorController.getLeftTriggerAxis() != 0) {
-             hammer.setDefaultCommand(
-                 new HammerMoveCommand(hammer, () -> {
-                     double triggerInput = manipulatorController.getRightTriggerAxis() - manipulatorController.getLeftTriggerAxis();
-                     return triggerInput;
-                 })
-             );
-         } else {
-            hammer.stop();
-         }
+         SmartDashboard.putNumber("encoder location", hammer.getEncoder());
+         hammer.setDefaultCommand(
+            new HammerMoveCommand(
+                    hammer,
+                    () -> {
+                        // {0to1} - {0to1} = {-1to1}
+                        double triggerInput = manipulatorController.getRightTriggerAxis()
+                                - manipulatorController.getLeftTriggerAxis();
+                        return triggerInput; // Returns -1.0 to 1.0, scaled in command
+                    }));
+         SmartDashboard.putString("loop level", "input based");
+         SmartDashboard.putString("Hammer Status", "moving??");
      }
  
      /** Set color for NeoPixels */
