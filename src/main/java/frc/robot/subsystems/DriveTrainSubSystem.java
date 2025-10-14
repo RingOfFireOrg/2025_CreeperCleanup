@@ -20,7 +20,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 //import frc.robot.commands.TankDriveCommand;
 
-public class DriveTrainSubSystem extends SubsystemBase implements DriveInterface {
+public class DriveTrainSubSystem extends SubsystemBase {
     private final VictorSP motorLeft1;
     private final VictorSP motorRight1;
 
