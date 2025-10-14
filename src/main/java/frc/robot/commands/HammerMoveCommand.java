@@ -41,18 +41,14 @@ import edu.wpi.first.wpilibj2.command.Command;
  
      @Override
      public void execute() {
-         // Apply speed with scaling factor (15% of input)
-         if ((hammer.getEncoder() %1) < 0.2 || (hammer.getEncoder() %1) > 0.2){
-            if ((hammer.getEncoder() %1) < 0.2){
-                hammer.setSpeed(0.05);
-            } else if( (hammer.getEncoder() %1) > 0.2){
-                hammer.setSpeed(-0.05);
-            }
+         if (speedSupplier.getAsDouble() == 0) {
+            // Hold position if near the target (within 0.2 units of a whole number)
+            hammer.reset();
          } else{
+            // Apply speed from joystick input, scaled down to 25%
             hammer.setSpeed(0.25 * speedSupplier.getAsDouble());
             SmartDashboard.putNumber("encoder location", hammer.getEncoder()%1);
          }
-         //hammer.stop();
      }
  
      @Override

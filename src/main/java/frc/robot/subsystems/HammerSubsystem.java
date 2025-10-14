@@ -92,4 +92,13 @@
      public double getSpeed() {
          return motor.get();
      }
+    
+     public void reset() {
+        // Adjust motor to nearest whole number position
+        if ((motor.getEncoder().getPosition() % 1) < 0.2){
+            motor.set(0.05);
+        } else if( (motor.getEncoder().getPosition() % 1) > 0.2){
+            motor.set(-0.05);
+        }
+     }
  }
