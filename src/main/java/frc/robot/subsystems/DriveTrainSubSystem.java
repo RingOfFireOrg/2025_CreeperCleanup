@@ -36,12 +36,12 @@ public class DriveTrainSubSystem extends SubsystemBase {
         // This method will be called once per scheduler run
     }
 
-    @Override
+    
     public void setLeftMotors(double speed) {
         motorLeft1.set(-speed);
     }
 
-    @Override
+    
     public void setRightMotors(double speed) {
         motorRight1.set(speed);
     }

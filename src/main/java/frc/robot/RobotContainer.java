@@ -58,7 +58,7 @@ public class RobotContainer {
                 new HammerMoveCommand(
                         hammer,
                         () -> {
-                            double out = 0.0;
+                            //double out = 0.0;
 
                             /*if (ManipulatorController.getRightBumper()) {
                                 out =  +Constants.HammerConstants.kMaxVoltage;
@@ -71,7 +71,7 @@ public class RobotContainer {
                            // {0to1} - {0to1} = {-1to1}
                             double xAxis = ManipulatorController.getRightTriggerAxis()
                                     - ManipulatorController.getLeftTriggerAxis();
-                            return xAxis * Constants.HammerConstants.kMaxVoltage;
+                            return xAxis;
                         }));
     }
 
