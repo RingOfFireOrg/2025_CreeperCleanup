@@ -1,36 +1,48 @@
-package frc.robot.commands;
+/**
+ * The HammerMoveCommand class controls the hammer subsystem by applying voltage based on joystick input.
+ * It is a command in the WPILib Command-based framework.
+ *
+ * Key Responsibilities:
+ * - Read joystick input (voltage supplier) and apply voltage to the hammer subsystem.
+ * - Stop the hammer when the command ends.
+ *
+ * Key Components:
+ * - Subsystem: HammerSubsystem.
+ * - Input: DoubleSupplier for joystick voltage.
+ *
+ * Lifecycle:
+ * - `initialize()`: Called once when the command starts.
+ * - `execute()`: Called repeatedly while the command is active.
+ * - `end()`: Called once when the command ends or is interrupted.
+ */
 
-import java.util.function.DoubleSupplier;
+package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.WhackerSubsystem;
+import java.util.function.DoubleSupplier;
 
-public class WhackerMoveCommand extends Command{
-    private final WhackerSubsystem grabber;
-    private final DoubleSupplier pivotVoltageSupplier;
-    private final DoubleSupplier wheelsVoltageSupplier;
-    
-    public WhackerMoveCommand(WhackerSubsystem grabber, DoubleSupplier pivotVoltageSupplier, DoubleSupplier wheelsVoltageSupplier) {
-        this.grabber = grabber;
-        this.pivotVoltageSupplier = pivotVoltageSupplier;
-        this.wheelsVoltageSupplier = wheelsVoltageSupplier;
-        addRequirements(grabber);
+public class WhackerMoveCommand extends Command {
+    private final WhackerSubsystem whacker;
+    private final DoubleSupplier voltageSupplier;
+    public WhackerMoveCommand(WhackerSubsystem whacker, DoubleSupplier voltageSupplier) {
+        this.whacker = whacker;
+        this.voltageSupplier = voltageSupplier;
+        addRequirements(whacker);
     }
 
     @Override
     public void initialize() {
-
+       // hammer.hit();
     }
 
     @Override
     public void execute() {
-        grabber.runPivotVoltage(0.15 * pivotVoltageSupplier.getAsDouble());
-        grabber.runWheelsVoltage(0.15 * wheelsVoltageSupplier.getAsDouble());
+        whacker.runVoltage(0.15 * voltageSupplier.getAsDouble());
     }
 
     @Override
     public void end(boolean interrupted) {
-        grabber.runPivotVoltage(0.0);
-        grabber.runWheelsVoltage(0.0);
+        whacker.runVoltage(0.0);
     }
 }

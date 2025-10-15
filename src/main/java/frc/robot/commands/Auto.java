@@ -5,15 +5,15 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.subsystems.WhackerSubsystem;
 import frc.robot.subsystems.DriveTrainSubSystem;
+import frc.robot.subsystems.WhackerSubsystem;
 
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
 public class Auto extends Command {
   /** Creates a new Auto. */
-  public Auto(DriveTrainSubSystem drivetrain, WhackerSubsystem grabber) {
+  public Auto(DriveTrainSubSystem drivetrain, WhackerSubsystem whacker) {
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(drivetrain, grabber);
+    addRequirements(drivetrain, whacker);
   }
 
   // Called when the command is initially scheduled.

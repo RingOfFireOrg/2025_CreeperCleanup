@@ -23,14 +23,11 @@ package frc.robot;
 import edu.wpi.first.wpilibj.DigitalOutput;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.commands.WhackerMoveCommand;
-import frc.robot.commands.HammerMoveCommand;
 import frc.robot.commands.TankDriveCommand;
-import frc.robot.subsystems.WhackerSubsystem;
+import frc.robot.commands.WhackerMoveCommand;
 import frc.robot.subsystems.DriveTrainSubSystem;
 import frc.robot.subsystems.WhackerInterfaceReal;
-import frc.robot.subsystems.HammerInterfaceReal;
-import frc.robot.subsystems.HammerSubsystem;
+import frc.robot.subsystems.WhackerSubsystem;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -43,10 +40,8 @@ public class RobotContainer {
     private final XboxController ManipulatorController = new XboxController(Constants.CONTROLLER_MANIPULATOR_ID);
 
     private final DriveTrainSubSystem driveTrain = new DriveTrainSubSystem();
-    private final HammerSubsystem hammer = new HammerSubsystem(
-            new HammerInterfaceReal(Constants.HammerConstants.kMotorPWMPort));
-    private final WhackerSubsystem grabber = new WhackerSubsystem(
-            new WhackerInterfaceReal(Constants.GrabberConstants.kMotorPWMPort));
+    private final WhackerSubsystem whacker = new WhackerSubsystem(
+            new WhackerInterfaceReal(Constants.WhackerConstants.kMotorPWMPort));
     
 
     private final DigitalOutput dioPin0 = new DigitalOutput(0);
@@ -62,28 +57,10 @@ public class RobotContainer {
 
     private void configureBindings() {
         // Example: Run hammer with joystick
-        hammer.setDefaultCommand(
-                new HammerMoveCommand(
-                        hammer,
-                        () -> {
-                            // {0to1} - {0to1} = {-1to1}
-                            double xAxis = ManipulatorController.getRightTriggerAxis()
-                                    - ManipulatorController.getLeftTriggerAxis();
-                            return xAxis * Constants.HammerConstants.kMaxVoltage;
-                        }));
-        grabber.setDefaultCommand(
-                new WhackerMoveCommand(
-                        grabber,
-                        () -> {
-                            double upDown = ManipulatorController.getLeftY();
-                            return upDown * Constants.GrabberConstants.kMaxVoltage;
-
-                        },
-                        () -> {
-                            double inOut = ManipulatorController.getRightTriggerAxis()
-                            - ManipulatorController.getLeftTriggerAxis();
-                            return inOut * Constants.GrabberConstants.kMaxVoltage;
-                        }));
+        whacker.setDefaultCommand(new WhackerMoveCommand(whacker, () -> {
+            double axis = ManipulatorController.getRightTriggerAxis() - ManipulatorController.getLeftTriggerAxis(); 
+            return axis * Constants.WhackerConstants.kMaxVoltage;
+        }));
     }
 
     /** Set color for NeoPixels */

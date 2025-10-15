@@ -21,13 +21,13 @@
 
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.subsystems.WhackerInterface.CreeperInterfaceInputs;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.subsystems.WhackerInterface.WhackerInterfaceInputs;
 
 public class WhackerSubsystem extends SubsystemBase {
     private final WhackerInterface io;
-    private final CreeperInterfaceInputs inputs = new CreeperInterfaceInputs();
+    private final WhackerInterfaceInputs inputs = new WhackerInterfaceInputs();
 
     public WhackerSubsystem(WhackerInterface io) {
         this.io = io;
@@ -36,16 +36,11 @@ public class WhackerSubsystem extends SubsystemBase {
     @Override
     public void periodic() {
         io.updateInputs(inputs);
-        SmartDashboard.putNumber("Pivot/Voltage", inputs.appliedPivotVolts);
-        SmartDashboard.putNumber("Wheels/Voltage", inputs.appliedWheelVolts);
+        SmartDashboard.putNumber("Whacker/Voltage", inputs.appliedVolts);
     }
 
-    public void runPivotVoltage(double volts) {
-        io.setPivotVoltage(volts);
-    }
-
-    public void runWheelsVoltage(double volts) {
-        io.setWheelsVoltage(volts);
+    public void runVoltage(double volts) {
+        io.setVoltage(volts);
     }
 
     public double getPosition() {
@@ -53,31 +48,15 @@ public class WhackerSubsystem extends SubsystemBase {
     }
 
     public double getVelocity() {
-        return inputs.pivotVelocityDegPerSec;
+        return inputs.velocityDegPerSec;
     }
 
-    public void moveUp() {
-        io.moveUp();
+    public void swingForward() {
+        io.swingForward();
     }
 
-    public void intake() {
-        io.intakeWheels();
-    }
-
-    public void outtake() {
-        io.outtakeWheels();
-    }
-
-    public void moveDown() {
-        io.moveDown();
-    }
-
-    public void stopWheels() {
-        io.stopWheels();
-    }
-
-    public void stopPivot() {
-        io.stopPivot();
+    public void swingBackward() {
+        io.swingBackward();
     }
 
     public void stop() {

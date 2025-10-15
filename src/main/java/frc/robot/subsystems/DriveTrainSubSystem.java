@@ -21,13 +21,13 @@ import frc.robot.Constants;
 //import frc.robot.commands.TankDriveCommand;
 
 public class DriveTrainSubSystem extends SubsystemBase implements DriveInterface {
-    private final VictorSP motorLeft1;
-    private final VictorSP motorRight1;
+    private final VictorSP motorLeft;
+    private final VictorSP motorRight;
 
     public DriveTrainSubSystem() {
-        motorLeft1 = new VictorSP(Constants.MOTOR_LEFT_1_ID);
-        motorRight1 = new VictorSP(Constants.MOTOR_RIGHT_1_ID);
-        motorRight1.setInverted(true);
+        motorLeft = new VictorSP(Constants.MOTOR_LEFT_1_ID);
+        motorRight = new VictorSP(Constants.MOTOR_RIGHT_1_ID);
+        motorRight.setInverted(true);
         //setDefaultCommand(new TankDriveCommand(this));
     }
 
@@ -38,11 +38,11 @@ public class DriveTrainSubSystem extends SubsystemBase implements DriveInterface
 
     @Override
     public void setLeftMotors(double speed) {
-        motorLeft1.set(-speed);
+        motorLeft.set(-speed);
     }
 
     @Override
     public void setRightMotors(double speed) {
-        motorRight1.set(speed);
+        motorRight.set(speed);
     }
 }
