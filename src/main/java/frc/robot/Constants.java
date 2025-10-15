@@ -47,7 +47,7 @@ public final class Constants {
     // Hammer constants
     public static final class HammerConstants {
         public static final double MAX_SPEED = 0.5;
-        public static final double DEFAULT_SPEED = 0.5;
+        public static final double DEFAULT_SPEED = 3.0;
         public static final int HammerCANID = 21; // CAN ID for the hammer motor controller
     }
 
