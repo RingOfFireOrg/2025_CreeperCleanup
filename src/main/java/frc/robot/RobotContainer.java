@@ -23,12 +23,12 @@ package frc.robot;
 import edu.wpi.first.wpilibj.DigitalOutput;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.commands.GrabberMoveCommand;
+import frc.robot.commands.WhackerMoveCommand;
 import frc.robot.commands.HammerMoveCommand;
 import frc.robot.commands.TankDriveCommand;
-import frc.robot.subsystems.CreeperGrabberSubsystem;
+import frc.robot.subsystems.WhackerSubsystem;
 import frc.robot.subsystems.DriveTrainSubSystem;
-import frc.robot.subsystems.GrabberInterfaceReal;
+import frc.robot.subsystems.WhackerInterfaceReal;
 import frc.robot.subsystems.HammerInterfaceReal;
 import frc.robot.subsystems.HammerSubsystem;
 
@@ -45,8 +45,8 @@ public class RobotContainer {
     private final DriveTrainSubSystem driveTrain = new DriveTrainSubSystem();
     private final HammerSubsystem hammer = new HammerSubsystem(
             new HammerInterfaceReal(Constants.HammerConstants.kMotorPWMPort));
-    private final CreeperGrabberSubsystem grabber = new CreeperGrabberSubsystem(
-            new GrabberInterfaceReal(Constants.GrabberConstants.kMotorPWMPort));
+    private final WhackerSubsystem grabber = new WhackerSubsystem(
+            new WhackerInterfaceReal(Constants.GrabberConstants.kMotorPWMPort));
     
 
     private final DigitalOutput dioPin0 = new DigitalOutput(0);
@@ -72,19 +72,18 @@ public class RobotContainer {
                             return xAxis * Constants.HammerConstants.kMaxVoltage;
                         }));
         grabber.setDefaultCommand(
-                new GrabberMoveCommand(
+                new WhackerMoveCommand(
                         grabber,
                         () -> {
-                            double upDown = ManipulatorController.getRightTriggerAxis()
-                                    - ManipulatorController.getLeftTriggerAxis();
+                            double upDown = ManipulatorController.getLeftY();
                             return upDown * Constants.GrabberConstants.kMaxVoltage;
 
                         },
                         () -> {
-                            double inOut = ManipulatorController.getLeftY();
+                            double inOut = ManipulatorController.getRightTriggerAxis()
+                            - ManipulatorController.getLeftTriggerAxis();
                             return inOut * Constants.GrabberConstants.kMaxVoltage;
-                        }
-                        ));
+                        }));
     }
 
     /** Set color for NeoPixels */
@@ -115,6 +114,7 @@ public class RobotContainer {
     }
 
     public Command getAutonomousCommand() {
+        //TankDriveCommand.execute();
         return null;
     }
 }

@@ -1,19 +1,17 @@
 
 package frc.robot.subsystems;
 
-public interface GrabberInterface {
+public interface WhackerInterface {
     public static class CreeperInterfaceInputs {
         public double positionDeg = 0.0;
         public double pivotVelocityDegPerSec = 0.0;
         public double appliedPivotVolts = 0.0;
-        public double appliedWheelVolts = 0.0;
         public double currentAmps = 0.0;
         public double wheelSpeed = 0.0;
     }
 
     public default void updateInputs(CreeperInterfaceInputs inputs) {}
     public default void setPivotVoltage(double volts) {}
-    public default void setWheelsVoltage(double volts) {}
 
     public default void moveUp() {}
     public default void moveDown() {}

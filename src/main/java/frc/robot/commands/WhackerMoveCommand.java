@@ -3,14 +3,14 @@ package frc.robot.commands;
 import java.util.function.DoubleSupplier;
 
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.subsystems.CreeperGrabberSubsystem;
+import frc.robot.subsystems.WhackerSubsystem;
 
-public class GrabberMoveCommand extends Command{
-    private final CreeperGrabberSubsystem grabber;
+public class WhackerMoveCommand extends Command{
+    private final WhackerSubsystem grabber;
     private final DoubleSupplier pivotVoltageSupplier;
     private final DoubleSupplier wheelsVoltageSupplier;
     
-    public GrabberMoveCommand(CreeperGrabberSubsystem grabber, DoubleSupplier pivotVoltageSupplier, DoubleSupplier wheelsVoltageSupplier) {
+    public WhackerMoveCommand(WhackerSubsystem grabber, DoubleSupplier pivotVoltageSupplier, DoubleSupplier wheelsVoltageSupplier) {
         this.grabber = grabber;
         this.pivotVoltageSupplier = pivotVoltageSupplier;
         this.wheelsVoltageSupplier = wheelsVoltageSupplier;

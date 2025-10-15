@@ -23,13 +23,13 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.subsystems.GrabberInterface.CreeperInterfaceInputs;
+import frc.robot.subsystems.WhackerInterface.CreeperInterfaceInputs;
 
-public class CreeperGrabberSubsystem extends SubsystemBase {
-    private final GrabberInterface io;
+public class WhackerSubsystem extends SubsystemBase {
+    private final WhackerInterface io;
     private final CreeperInterfaceInputs inputs = new CreeperInterfaceInputs();
 
-    public CreeperGrabberSubsystem(GrabberInterface io) {
+    public WhackerSubsystem(WhackerInterface io) {
         this.io = io;
     }
 
