@@ -46,12 +46,9 @@ public final class Constants {
 
     // Hammer constants
     public static final class HammerConstants {
-        public static final int kMotorPWMPort = 5; // Robot's PWM port on RoboRio
-        public static final double kMaxVoltage = 12.0;
         public static final double MAX_SPEED = 0.5;
-        public static final double MIN_SPEED = -0.5;
+        public static final double DEFAULT_SPEED = 3.0;
         public static final int HammerCANID = 21; // CAN ID for the hammer motor controller
-        public static final double VoltageFactor = 0.5; // Adjust this factor based on testing
     }
 
     public enum NeoPixelColors {
