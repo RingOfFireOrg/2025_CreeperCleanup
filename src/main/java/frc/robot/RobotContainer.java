@@ -55,7 +55,6 @@ import edu.wpi.first.wpilibj2.command.Command;
  
      private void configureBindings() {
          // Hammer control with triggers: right trigger = forward, left trigger = backward
-         SmartDashboard.putNumber("encoder location", hammer.getEncoder());
          hammer.setDefaultCommand(
             new HammerMoveCommand(
                     hammer,
@@ -65,8 +64,6 @@ import edu.wpi.first.wpilibj2.command.Command;
                                 - manipulatorController.getLeftTriggerAxis();
                         return triggerInput; // Returns -1.0 to 1.0, scaled in command
                     }));
-         SmartDashboard.putString("loop level", "input based");
-         SmartDashboard.putString("Hammer Status", "moving??");
      }
  
      /** Set color for NeoPixels */

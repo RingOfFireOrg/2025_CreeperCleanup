@@ -58,7 +58,6 @@
          // Clamp speed to valid range
          speed = Math.max(-1.0, Math.min(1.0, speed));
          motor.set(speed);
-         SmartDashboard.putNumber("encoder location", motor.getEncoder().getPosition());
      }
      
      public void encoderReset() {
@@ -75,14 +74,7 @@
       */
      public void stop() {
         SmartDashboard.putString("Hammer Status", "Stopping");
-        while ((motor.getEncoder().getPosition()%1) < 1 || (motor.getEncoder().getPosition()%1) > -1) {
-            if ((motor.getEncoder().getPosition()%1) >= -1) {
-                motor.set(0.05);
-            } else if ((motor.getEncoder().getPosition()%1) <= 1) {
-                motor.set(-0.05);
-            }
-            SmartDashboard.putNumber("encoder location", motor.getEncoder().getPosition());
-        }
+        motor.set(0);
      }
  
      /**
@@ -95,10 +87,25 @@
     
      public void reset() {
         // Adjust motor to nearest whole number position
-        if ((motor.getEncoder().getPosition() % 1) < 0.2){
-            motor.set(0.05);
-        } else if( (motor.getEncoder().getPosition() % 1) > 0.2){
-            motor.set(-0.05);
-        }
-     }
- }
+        if (motor.getEncoder().getPosition() > 0) {
+            while(motor.getEncoder().getPosition() - Math.floor(motor.getEncoder().getPosition()) > 0.25) {
+                motor.set(-0.03);
+                SmartDashboard.putString("reset direction", "backward");
+                SmartDashboard.putNumber("encoder velocity", motor.getEncoder().getVelocity());
+                SmartDashboard.putNumber("encoder location", motor.getEncoder().getPosition());
+            }
+            motor.set(0);
+        } else if (motor.getEncoder().getPosition() < 0) {
+            while (motor.getEncoder().getPosition() - Math.floor(motor.getEncoder().getPosition()) < -0.25) {
+                motor.set(0.03);
+                SmartDashboard.putString("reset direction", "forward");
+                SmartDashboard.putNumber("encoder velocity", motor.getEncoder().getVelocity());
+                SmartDashboard.putNumber("encoder location", motor.getEncoder().getPosition());
+            }
+            motor.set(0);
+        } 
+        SmartDashboard.putString("Hammer Status", "Resetting");
+        SmartDashboard.putNumber("encoder location", motor.getEncoder().getVelocity());
+    }
+}
+ 
