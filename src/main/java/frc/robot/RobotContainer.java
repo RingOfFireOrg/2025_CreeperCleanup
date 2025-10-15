@@ -71,7 +71,7 @@ public class RobotContainer {
                            // {0to1} - {0to1} = {-1to1}
                             double xAxis = ManipulatorController.getRightTriggerAxis()
                                     - ManipulatorController.getLeftTriggerAxis();
-                            return xAxis;
+                            return xAxis * Constants.HammerConstants.DEFAULT_SPEED;
                         }));
     }
 
