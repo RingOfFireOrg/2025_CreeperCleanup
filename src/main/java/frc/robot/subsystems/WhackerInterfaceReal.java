@@ -26,10 +26,7 @@ import com.revrobotics.spark.SparkLowLevel.MotorType;
 import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
 import com.revrobotics.spark.config.SparkMaxConfig;
 import edu.wpi.first.wpilibj.DriverStation;
-
-import edu.wpi.first.wpilibj.Timer;
 import frc.robot.Constants.WhackerConstants;
-
 public class WhackerInterfaceReal implements WhackerInterface {
     private final SparkMax motor;
     private SparkMaxConfig config = new SparkMaxConfig();
@@ -59,11 +56,11 @@ public class WhackerInterfaceReal implements WhackerInterface {
 
     @Override
     public void swingForward() {
-        motor.set(1); //FULL SPEED AHEAD
+        motor.set(0.2); 
     }
 
     public void swingBackward() {
-        motor.set(-1); // FULL SPEED BACK
+        motor.set(-0.2); 
     }
 
     public void setSpeed(double speed) {

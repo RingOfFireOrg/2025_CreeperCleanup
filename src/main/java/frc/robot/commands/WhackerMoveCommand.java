@@ -19,6 +19,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.Constants;
 import frc.robot.subsystems.WhackerSubsystem;
 import java.util.function.DoubleSupplier;
 
@@ -38,7 +39,7 @@ public class WhackerMoveCommand extends Command {
 
     @Override
     public void execute() {
-        whacker.runVoltage(0.15 * voltageSupplier.getAsDouble());
+        whacker.runVoltage(voltageSupplier.getAsDouble()*0.5);
     }
 
     @Override

@@ -23,6 +23,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj.DigitalOutput;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.commands.Auto;
 import frc.robot.commands.TankDriveCommand;
 import frc.robot.commands.WhackerMoveCommand;
 import frc.robot.subsystems.DriveTrainSubSystem;
@@ -92,6 +93,6 @@ public class RobotContainer {
 
     public Command getAutonomousCommand() {
         //TankDriveCommand.execute();
-        return null;
+        return new Auto(driveTrain, whacker);
     }
 }
