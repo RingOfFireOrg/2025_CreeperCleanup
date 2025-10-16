@@ -23,8 +23,8 @@
  import edu.wpi.first.wpilibj.DigitalOutput;
  import edu.wpi.first.wpilibj.XboxController;
  import edu.wpi.first.wpilibj2.command.Command;
- import edu.wpi.first.wpilibj2.command.button.JoystickButton;
- import frc.robot.Constants.ClamperConstants;
+ //import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+ //import frc.robot.Constants.ClamperConstants;
  import frc.robot.Constants.AutoConstants;
  //import frc.robot.Constants.HammerConstants;
  import frc.robot.commands.*;
@@ -42,7 +42,7 @@
  
      private final DriveTrainSubSystem driveTrain = new DriveTrainSubSystem();
      private final HammerSubsystem hammer = new HammerSubsystem();
-     private final ClamperSubsystem clamper = new ClamperSubsystem();
+     //private final ClamperSubsystem clamper = new ClamperSubsystem();
  
      private final DigitalOutput dioPin0 = new DigitalOutput(0);
      private final DigitalOutput dioPin1 = new DigitalOutput(1);
@@ -69,6 +69,7 @@
  
          // Clamper controls
          // A button: Rotate forward
+         /*
          new JoystickButton(manipulatorController, XboxController.Button.kA.value)
              .onTrue(new ClamperMoveCommand(
                  clamper, 
@@ -81,6 +82,7 @@
                  clamper, 
                  -ClamperConstants.kRotationsPerPress, 
                  ClamperConstants.kRotationSpeed));
+        */
      }
  
      /** Set color for NeoPixels */
