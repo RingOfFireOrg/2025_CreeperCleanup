@@ -24,11 +24,11 @@ import java.util.function.DoubleSupplier;
 
 public class HammerMoveCommand extends Command {
     private final HammerSubsystem hammer;
-    private final DoubleSupplier voltageSupplier;
+    private final DoubleSupplier speedSupplier;
 
-    public HammerMoveCommand(HammerSubsystem hammer, DoubleSupplier voltageSupplier) {
+    public HammerMoveCommand(HammerSubsystem hammer, DoubleSupplier speedSupplier) {
         this.hammer = hammer;
-        this.voltageSupplier = voltageSupplier;
+        this.speedSupplier = speedSupplier;
         addRequirements(hammer);
     }
 
@@ -39,11 +39,12 @@ public class HammerMoveCommand extends Command {
 
     @Override
     public void execute() {
-        hammer.runVoltage(0.15 * voltageSupplier.getAsDouble());
+        
+        hammer.setSpeed(0.15 * speedSupplier.getAsDouble());
     }
 
     @Override
-    public void end(boolean interrupted) {
-        hammer.runVoltage(0.0);
+    public void end(boolean interrupted) { 
+        hammer.stop();
     }
 }

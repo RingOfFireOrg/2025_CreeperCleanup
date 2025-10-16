@@ -26,7 +26,6 @@ import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.commands.HammerMoveCommand;
 import frc.robot.commands.TankDriveCommand;
 import frc.robot.subsystems.DriveTrainSubSystem;
-import frc.robot.subsystems.HammerInterfaceReal;
 import frc.robot.subsystems.HammerSubsystem;
 
 /**
@@ -40,8 +39,7 @@ public class RobotContainer {
     private final XboxController ManipulatorController = new XboxController(Constants.CONTROLLER_MANIPULATOR_ID);
 
     private final DriveTrainSubSystem driveTrain = new DriveTrainSubSystem();
-    private final HammerSubsystem hammer = new HammerSubsystem(
-            new HammerInterfaceReal(Constants.HammerConstants.kMotorPWMPort));
+    private final HammerSubsystem hammer = new HammerSubsystem();
 
     private final DigitalOutput dioPin0 = new DigitalOutput(0);
     private final DigitalOutput dioPin1 = new DigitalOutput(1);
@@ -63,7 +61,7 @@ public class RobotContainer {
                             // {0to1} - {0to1} = {-1to1}
                             double xAxis = ManipulatorController.getRightTriggerAxis()
                                     - ManipulatorController.getLeftTriggerAxis();
-                            return xAxis * Constants.HammerConstants.kMaxVoltage;
+                            return xAxis * Constants.HammerConstants.DEFAULT_SPEED;
                         }));
     }
 
