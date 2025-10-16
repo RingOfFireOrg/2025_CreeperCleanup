@@ -44,6 +44,11 @@ public final class Constants {
         public static final double SPEED_FACTOR = 0.82;
     }
 
+    public static final class AutoConstants {
+        public static final double aSpeed = 0.5;
+        public static final double aDuration = 2;
+    }
+
     // Hammer constants
     public static final class HammerConstants {
         public static final int HammerCANID = 21; // CAN ID for the hammer motor controller
