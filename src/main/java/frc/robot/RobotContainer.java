@@ -50,9 +50,9 @@
      /** The container for the robot. Contains subsystems, OI devices, and commands. */
      public RobotContainer() {
          setNeoPixelColor();
-         configureBindings();
          driveTrain.setDefaultCommand(
-                 new TankDriveCommand(driveTrain, driverController));
+            new TankDriveCommand(driveTrain, driverController));
+         configureBindings();
      }
  
      private void configureBindings() {
@@ -82,6 +82,10 @@
                  clamper, 
                  -ClamperConstants.kRotationsPerPress, 
                  ClamperConstants.kRotationSpeed));
+
+        new JoystickButton(manipulatorController, XboxController.Button.kY.value)
+             .whileTrue(new DriveToBallCommand(driveTrain));
+             
         
      }
  
