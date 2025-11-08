@@ -25,7 +25,7 @@
  import edu.wpi.first.wpilibj2.command.Command;
  import edu.wpi.first.wpilibj2.command.button.JoystickButton;
  import frc.robot.Constants.ClamperConstants;
- import frc.robot.Constants.AutoConstants;
+ //import frc.robot.Constants.AutoConstants;
  //import frc.robot.Constants.HammerConstants;
  import frc.robot.commands.*;
  import frc.robot.subsystems.*;
@@ -112,6 +112,6 @@
      }
  
      public Command getAutonomousCommand() {
-         return new HammerAutoCommand(hammer);
+         return new AutoMainCommand(driveTrain, hammer);
      }
  }
