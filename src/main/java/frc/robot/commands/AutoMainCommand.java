@@ -10,7 +10,7 @@ public class AutoMainCommand extends SequentialCommandGroup {
 
         addCommands(
             // 1. Drive forward (tank drive) for 2 seconds
-            new DriveForwardCommand(driveTrain, 0.5).withTimeout(2),
+            new DriveForwardCommand(driveTrain, -0.5).withTimeout(2),
 
             // 2. Hammer forward for 5 seconds
             new HammerMoveCommand(hammer, () -> 1.0).withTimeout(5),
