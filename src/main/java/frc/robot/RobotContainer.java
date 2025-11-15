@@ -82,9 +82,6 @@
                  clamper, 
                  -ClamperConstants.kRotationsPerPress, 
                  ClamperConstants.kRotationSpeed));
-
-        new JoystickButton(manipulatorController, XboxController.Button.kY.value)
-             .whileTrue(new DriveToBallCommand(driveTrain));
              
         
      }
