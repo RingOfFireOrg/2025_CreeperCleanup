@@ -20,14 +20,14 @@
 
  import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
- import frc.robot.subsystems.HammerSubsystem;
+ import frc.robot.subsystems.ArmSubsystem;
  import java.util.function.DoubleSupplier;
  
- public class HammerMoveCommand extends Command {
-     private final HammerSubsystem hammer;
+ public class ArmMoveCommand extends Command {
+     private final ArmSubsystem hammer;
      private final DoubleSupplier speedSupplier;
  
-     public HammerMoveCommand(HammerSubsystem hammer, DoubleSupplier speedSupplier) {
+     public ArmMoveCommand(ArmSubsystem hammer, DoubleSupplier speedSupplier) {
          this.hammer = hammer;
          this.speedSupplier = speedSupplier;
          addRequirements(hammer);
@@ -36,21 +36,12 @@ import edu.wpi.first.wpilibj2.command.Command;
      @Override
      public void initialize() {
          // Called when command starts
-         hammer.encoderReset();
      }
  
      @Override
      public void execute() {
-        SmartDashboard.putNumber("speed supplier", speedSupplier.getAsDouble());
-         if (speedSupplier.getAsDouble() == 0){
-            // Hold position if near the target (within 0.2 units of a whole number)
-            hammer.reset();
-            
-         } else{
-            // Apply speed from joystick input, scaled down to 25%
-            hammer.setSpeed(0.25 * speedSupplier.getAsDouble());
-            SmartDashboard.putNumber("encoder location", hammer.getEncoder());
-         }
+        double speed = speedSupplier.getAsDouble();
+        hammer.setSpeed(speed);
      }
  
      @Override

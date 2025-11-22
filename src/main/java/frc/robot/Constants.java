@@ -46,14 +46,22 @@ public final class Constants {
     }
 
     // Hammer constants
-    public static final class HammerConstants {
-        public static final int HammerCANID = 21; // CAN ID for the hammer motor controller
+    public static final class ArmConstants {
+        public static final int ArmCANID = 21; // CAN ID for the hammer motor controller
         
         public static final double kMaxSpeed = 0.7;
         public static final double kDefaultSpeed = 0.5; // 15% speed for trigger control
     }
+    
+    // Intake Constants
+    public static final class IntakeConstants {
+        public static final int IntakeCANID = 22;
+    }
 
-
+    public static final class AutoConstants {
+        public static final double aSpeed = 0.5;
+        public static final double aDuration = 2;
+    }
     public enum NeoPixelColors {
         BLUE,
         RED,

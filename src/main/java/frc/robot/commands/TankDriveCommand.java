@@ -41,6 +41,10 @@
  
    // Called every time the scheduler runs while the command is scheduled.
    @Override
+   public void initialize() {
+   }
+
+   @Override
    public void execute() {
      //Get the value from the user.. how the drive controller is pressed
      double LeftStickY = controller.getRawAxis(Constants.LEFT_STICK_Y) * DriveConstants.SPEED_FACTOR;

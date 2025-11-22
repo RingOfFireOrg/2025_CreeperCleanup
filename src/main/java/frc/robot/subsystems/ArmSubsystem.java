@@ -27,13 +27,13 @@
  import com.revrobotics.spark.config.SparkMaxConfig;
  import edu.wpi.first.wpilibj2.command.SubsystemBase;
  import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
- import frc.robot.Constants.HammerConstants;
+ import frc.robot.Constants.ArmConstants;
  
- public class HammerSubsystem extends SubsystemBase {
+ public class ArmSubsystem extends SubsystemBase {
      private final SparkMax motor;
  
-     public HammerSubsystem() {
-         motor = new SparkMax(HammerConstants.HammerCANID, MotorType.kBrushless);
+     public ArmSubsystem() {
+         motor = new SparkMax(ArmConstants.ArmCANID, MotorType.kBrushless);
          
          SparkMaxConfig config = new SparkMaxConfig();
          config.idleMode(IdleMode.kBrake)
@@ -56,16 +56,8 @@
       */
      public void setSpeed(double speed) {
          // Clamp speed to valid range
-         speed = Math.max(-1.0, Math.min(1.0, speed));
+         speed = Math.max(-0.2, Math.min(0.2, speed));
          motor.set(speed);
-     }
-     
-     public void encoderReset() {
-         motor.getEncoder().setPosition(0);
-     }
-
-     public double getEncoder() {
-        return motor.getEncoder().getPosition();
      }
         
  
@@ -73,7 +65,6 @@
       * Stop the hammer motor
       */
      public void stop() {
-        SmartDashboard.putString("Hammer Status", "Stopping");
         motor.set(0);
      }
  
@@ -86,26 +77,7 @@
      }
     
      public void reset() {
-        // Adjust motor to nearest whole number position
-        if (motor.getEncoder().getPosition() > 0) {
-            while(motor.getEncoder().getPosition() - Math.floor(motor.getEncoder().getPosition()) > 0.25) {
-                motor.set(-0.03);
-                SmartDashboard.putString("reset direction", "backward");
-                SmartDashboard.putNumber("encoder velocity", motor.getEncoder().getVelocity());
-                SmartDashboard.putNumber("encoder location", motor.getEncoder().getPosition());
-            }
-            motor.set(0);
-        } else if (motor.getEncoder().getPosition() < 0) {
-            while (motor.getEncoder().getPosition() - Math.floor(motor.getEncoder().getPosition()) < -0.25) {
-                motor.set(0.03);
-                SmartDashboard.putString("reset direction", "forward");
-                SmartDashboard.putNumber("encoder velocity", motor.getEncoder().getVelocity());
-                SmartDashboard.putNumber("encoder location", motor.getEncoder().getPosition());
-            }
-            motor.set(0);
-        } 
-        SmartDashboard.putString("Hammer Status", "Resetting");
-        SmartDashboard.putNumber("encoder location", motor.getEncoder().getVelocity());
+        motor.set(0); 
     }
 }
  

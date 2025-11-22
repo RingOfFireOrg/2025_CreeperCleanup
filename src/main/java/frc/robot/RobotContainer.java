@@ -24,7 +24,8 @@
  import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
- //import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import frc.robot.Constants.AutoConstants;
+//import edu.wpi.first.wpilibj2.command.button.JoystickButton;
  //import frc.robot.Constants.HammerConstants;
  import frc.robot.commands.*;
  import frc.robot.subsystems.*;
@@ -40,7 +41,7 @@ import edu.wpi.first.wpilibj2.command.Command;
      private final XboxController manipulatorController = new XboxController(Constants.CONTROLLER_MANIPULATOR_ID);
  
      private final DriveTrainSubSystem driveTrain = new DriveTrainSubSystem();
-     private final HammerSubsystem hammer = new HammerSubsystem();
+     private final ArmSubsystem hammer = new ArmSubsystem();
  
      private final DigitalOutput dioPin0 = new DigitalOutput(0);
      private final DigitalOutput dioPin1 = new DigitalOutput(1);
@@ -56,12 +57,10 @@ import edu.wpi.first.wpilibj2.command.Command;
      private void configureBindings() {
          // Hammer control with triggers: right trigger = forward, left trigger = backward
          hammer.setDefaultCommand(
-            new HammerMoveCommand(
+            new ArmMoveCommand(
                     hammer,
                     () -> {
-                        // {0to1} - {0to1} = {-1to1}
-                        double triggerInput = manipulatorController.getRightTriggerAxis()
-                                - manipulatorController.getLeftTriggerAxis();
+                        double triggerInput = manipulatorController.getLeftY();
                         return triggerInput; // Returns -1.0 to 1.0, scaled in command
                     }));
      }
@@ -92,7 +91,6 @@ import edu.wpi.first.wpilibj2.command.Command;
          return manipulatorController.getRawAxis(axis);
      }
  
-     public Command getAutonomousCommand() {
-         return null;
+     
+     //ppublic Command getAutonomousCommand() {
      }
- }
