@@ -56,7 +56,7 @@
       */
      public void setSpeed(double speed) {
          // Clamp speed to valid range
-         speed = Math.max(-0.2, Math.min(0.2, speed));
+         speed = Math.max(-0.05, Math.min(0.20, speed));
          motor.set(speed);
      }
         

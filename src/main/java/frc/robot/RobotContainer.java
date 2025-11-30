@@ -60,7 +60,7 @@ import frc.robot.Constants.AutoConstants;
             new ArmMoveCommand(
                     hammer,
                     () -> {
-                        double triggerInput = manipulatorController.getLeftY();
+                        double triggerInput = -manipulatorController.getLeftY();
                         return triggerInput; // Returns -1.0 to 1.0, scaled in command
                     }));
      }
