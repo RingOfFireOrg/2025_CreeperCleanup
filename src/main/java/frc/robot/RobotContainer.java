@@ -41,7 +41,8 @@ import frc.robot.Constants.AutoConstants;
      private final XboxController manipulatorController = new XboxController(Constants.CONTROLLER_MANIPULATOR_ID);
  
      private final DriveTrainSubSystem driveTrain = new DriveTrainSubSystem();
-     private final ArmSubsystem hammer = new ArmSubsystem();
+     private final ArmSubsystem arm = new ArmSubsystem();
+     private final IntakeSubsystem intake = new IntakeSubsystem();
  
      private final DigitalOutput dioPin0 = new DigitalOutput(0);
      private final DigitalOutput dioPin1 = new DigitalOutput(1);
@@ -56,11 +57,19 @@ import frc.robot.Constants.AutoConstants;
  
      private void configureBindings() {
          // Hammer control with triggers: right trigger = forward, left trigger = backward
-         hammer.setDefaultCommand(
+         arm.setDefaultCommand(
             new ArmMoveCommand(
-                    hammer,
+                    arm,
                     () -> {
                         double triggerInput = -manipulatorController.getLeftY();
+                        return triggerInput; // Returns -1.0 to 1.0, scaled in command
+                    }));
+        intake.setDefaultCommand(
+            new IntakeCommand(
+                    intake,
+                    () -> {
+                        double triggerInput = -manipulatorController.getRightTriggerAxis()+
+                                              manipulatorController.getLeftTriggerAxis();
                         return triggerInput; // Returns -1.0 to 1.0, scaled in command
                     }));
      }
