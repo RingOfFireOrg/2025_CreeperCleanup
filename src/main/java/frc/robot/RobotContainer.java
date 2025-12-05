@@ -21,14 +21,21 @@
  package frc.robot;
 
  import edu.wpi.first.wpilibj.DigitalOutput;
- import edu.wpi.first.wpilibj.XboxController;
- import edu.wpi.first.wpilibj2.command.Command;
- import edu.wpi.first.wpilibj2.command.button.JoystickButton;
- import frc.robot.Constants.ClamperConstants;
- //import frc.robot.Constants.AutoConstants;
- //import frc.robot.Constants.HammerConstants;
- import frc.robot.commands.*;
- import frc.robot.subsystems.*;
+import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import frc.robot.Constants.ClamperConstants;
+//import frc.robot.Constants.AutoConstants;
+//import frc.robot.Constants.HammerConstants;
+import frc.robot.commands.AutoMainCommand;
+import frc.robot.commands.ClamperMoveCommand;
+import frc.robot.commands.HammerMoveCommand;
+import frc.robot.commands.TankDriveCommand;
+import frc.robot.subsystems.ClamperSubsystem;
+import frc.robot.subsystems.DriveTrainSubSystem;
+import frc.robot.subsystems.HammerSubsystem;
+import frc.robot.subsystems.ServoGateSubsystem;
  
  /**
   * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -43,6 +50,7 @@
      private final DriveTrainSubSystem driveTrain = new DriveTrainSubSystem();
      private final HammerSubsystem hammer = new HammerSubsystem();
      private final ClamperSubsystem clamper = new ClamperSubsystem();
+     private final ServoGateSubsystem gate = new ServoGateSubsystem();
  
      private final DigitalOutput dioPin0 = new DigitalOutput(0);
      private final DigitalOutput dioPin1 = new DigitalOutput(1);
@@ -83,6 +91,13 @@
                  -ClamperConstants.kRotationsPerPress, 
                  ClamperConstants.kRotationSpeed));
              
+         // X button — open gate
+         new JoystickButton(manipulatorController, XboxController.Button.kX.value)
+             .onTrue(new InstantCommand(() -> gate.openGate()));
+
+         // Y button — close gate
+         new JoystickButton(manipulatorController, XboxController.Button.kY.value)
+             .onTrue(new InstantCommand(() -> gate.closeGate()));
         
      }
  
