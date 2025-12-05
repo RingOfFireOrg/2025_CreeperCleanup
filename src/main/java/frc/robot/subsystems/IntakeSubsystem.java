@@ -42,7 +42,7 @@ public class IntakeSubsystem extends SubsystemBase {
       */
      public void setSpeed(double speed) {
          // Clamp speed to valid range
-         speed = Math.max(-1.0, Math.min(1.0, speed));
+         speed = Math.max(-0.2, Math.min(0.2, speed));
          motor.set(speed);
      }
         
