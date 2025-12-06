@@ -24,13 +24,13 @@ import edu.wpi.first.wpilibj2.command.Command;
  import java.util.function.DoubleSupplier;
  
  public class ArmMoveCommand extends Command {
-     private final ArmSubsystem hammer;
+     private final ArmSubsystem arm;
      private final DoubleSupplier speedSupplier;
  
-     public ArmMoveCommand(ArmSubsystem hammer, DoubleSupplier speedSupplier) {
-         this.hammer = hammer;
+     public ArmMoveCommand(ArmSubsystem arm, DoubleSupplier speedSupplier) {
+         this.arm = arm;
          this.speedSupplier = speedSupplier;
-         addRequirements(hammer);
+         addRequirements(arm);
      }
  
      @Override
@@ -41,11 +41,11 @@ import edu.wpi.first.wpilibj2.command.Command;
      @Override
      public void execute() {
         double speed = speedSupplier.getAsDouble();
-        hammer.setSpeed(speed);
+        arm.setSpeed(speed);
      }
  
      @Override
      public void end(boolean interrupted) {
-         hammer.stop();
+         arm.stop();
      }
  }

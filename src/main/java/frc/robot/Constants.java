@@ -53,11 +53,17 @@ public final class Constants {
         public static final double kDefaultSpeed = 0.5; // 15% speed for trigger control
     }
     
+    //Tapper constants
+    public static final class TapperConstants {
+        public static final int TapperCANID = 23;
+    }
+
     // Intake Constants
     public static final class IntakeConstants {
         public static final int IntakeCANID = 22;
     }
 
+    // Autonomous constants
     public static final class AutoConstants {
         public static final double aSpeed = 0.5;
         public static final double aDuration = 2;

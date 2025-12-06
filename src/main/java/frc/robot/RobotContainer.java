@@ -43,6 +43,7 @@ import frc.robot.Constants.AutoConstants;
      private final DriveTrainSubSystem driveTrain = new DriveTrainSubSystem();
      private final ArmSubsystem arm = new ArmSubsystem();
      private final IntakeSubsystem intake = new IntakeSubsystem();
+     private final TappingArmSubsystem tapper = new TappingArmSubsystem();
  
      private final DigitalOutput dioPin0 = new DigitalOutput(0);
      private final DigitalOutput dioPin1 = new DigitalOutput(1);
@@ -70,6 +71,14 @@ import frc.robot.Constants.AutoConstants;
                     () -> {
                         double triggerInput = -manipulatorController.getRightTriggerAxis()+
                                               manipulatorController.getLeftTriggerAxis();
+                        return triggerInput; // Returns -1.0 to 1.0, scaled in command
+                    }));
+        
+        tapper.setDefaultCommand(
+            new TappingArmCommand(
+                    tapper,
+                    () -> {
+                        double triggerInput = -manipulatorController.getRightY();
                         return triggerInput; // Returns -1.0 to 1.0, scaled in command
                     }));
      }
