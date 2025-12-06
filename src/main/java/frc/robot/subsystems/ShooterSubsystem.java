@@ -26,15 +26,14 @@
  import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
  import com.revrobotics.spark.config.SparkMaxConfig;
  import edu.wpi.first.wpilibj2.command.SubsystemBase;
- import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
- import frc.robot.Constants.HammerConstants;
+ import frc.robot.Constants.ShooterConstants;
  
- public class HammerSubsystem extends SubsystemBase {
+ public class ShooterSubsystem extends SubsystemBase {
      private final SparkMax motor;
  
-     public HammerSubsystem() {
-         motor = new SparkMax(HammerConstants.HammerCANID, MotorType.kBrushless);
-         
+     public ShooterSubsystem() {
+        motor = new SparkMax(ShooterConstants.SHOOTER_CAN_ID, MotorType.kBrushless);
+
          SparkMaxConfig config = new SparkMaxConfig();
          config.idleMode(IdleMode.kBrake)
                .smartCurrentLimit(25);

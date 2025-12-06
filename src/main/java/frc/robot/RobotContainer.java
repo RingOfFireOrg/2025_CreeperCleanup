@@ -23,10 +23,11 @@ package frc.robot;
 import edu.wpi.first.wpilibj.DigitalOutput;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.commands.HammerMoveCommand;
 import frc.robot.commands.TankDriveCommand;
 import frc.robot.subsystems.DriveTrainSubSystem;
-import frc.robot.subsystems.HammerSubsystem;
+import frc.robot.subsystems.ShooterSubsystem;
+import frc.robot.commands.ShooterCommand;
+
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -39,7 +40,7 @@ public class RobotContainer {
     private final XboxController ManipulatorController = new XboxController(Constants.CONTROLLER_MANIPULATOR_ID);
 
     private final DriveTrainSubSystem driveTrain = new DriveTrainSubSystem();
-    private final HammerSubsystem hammer = new HammerSubsystem();
+    private final ShooterSubsystem shooter = new ShooterSubsystem();
 
     private final DigitalOutput dioPin0 = new DigitalOutput(0);
     private final DigitalOutput dioPin1 = new DigitalOutput(1);
@@ -53,25 +54,13 @@ public class RobotContainer {
     }
 
     private void configureBindings() {
-        // Example: Run hammer with joystick
-        hammer.setDefaultCommand(
-                new HammerMoveCommand(
-                        hammer,
+        shooter.setDefaultCommand(
+            new ShooterCommand(
+                shooter,
                         () -> {
-                            //double out = 0.0;
-
-                            /*if (ManipulatorController.getRightBumper()) {
-                                out =  +Constants.HammerConstants.kMaxVoltage;
-                            } else if(ManipulatorController.getLeftBumper()){
-                                out = -Constants.HammerConstants.kMaxVoltage;
-                            } else {
-                                out = 0.0;
-                            }
-                            return out; */
-                           // {0to1} - {0to1} = {-1to1}
                             double xAxis = ManipulatorController.getRightTriggerAxis()
                                     - ManipulatorController.getLeftTriggerAxis();
-                            return xAxis * Constants.HammerConstants.DEFAULT_SPEED;
+                            return xAxis * Constants.ShooterConstants.DEFAULT_SPEED;
                         }));
     }
 
