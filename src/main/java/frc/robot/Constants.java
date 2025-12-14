@@ -47,7 +47,7 @@ public final class Constants {
    
     public static final class ShooterConstants {
         public static final double MAX_SPEED = 0.5;
-        public static final double DEFAULT_SPEED = 3.0;
+        public static final double DEFAULT_SPEED = 0.5;
         public static final int SHOOTER_CAN_ID = 1; //shooter CAN ID
         public static final int ARM_CAN_ID = 2; //arm CAN ID
     }
