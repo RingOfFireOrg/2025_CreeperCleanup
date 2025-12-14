@@ -71,7 +71,7 @@ public final class Constants {
     public static class ServoGateConstants {
         public static final double OPEN_ANGLE = 0.0;   // Fully open
         public static final double CLOSED_ANGLE = 90.0; // Fully closed
-        public static final int SERVO_PWM_PORT = 2;
+        public static final int SERVO_PWM_PORT = 9;
     }
 
     public enum NeoPixelColors {
