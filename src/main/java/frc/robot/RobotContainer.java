@@ -26,6 +26,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.commands.TankDriveCommand;
 import frc.robot.subsystems.DriveTrainSubSystem;
 import frc.robot.subsystems.ShooterSubsystem;
+import frc.robot.commands.AutoCommand;
 import frc.robot.commands.ShooterCommand;
 
 
@@ -92,6 +93,6 @@ public class RobotContainer {
     }
 
     public Command getAutonomousCommand() {
-        return null;
+        return new AutoCommand(driveTrain, shooter);
     }
 }
