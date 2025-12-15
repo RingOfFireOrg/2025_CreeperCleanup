@@ -19,17 +19,17 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.subsystems.HammerSubsystem;
+import frc.robot.subsystems.ShooterSubsystem;
 import java.util.function.DoubleSupplier;
 
-public class HammerMoveCommand extends Command {
-    private final HammerSubsystem hammer;
-    private final DoubleSupplier voltageSupplier;
+public class ShooterCommand extends Command {
+    private final ShooterSubsystem shooter;
+    private final DoubleSupplier speedSupplier;
 
-    public HammerMoveCommand(HammerSubsystem hammer, DoubleSupplier voltageSupplier) {
-        this.hammer = hammer;
-        this.voltageSupplier = voltageSupplier;
-        addRequirements(hammer);
+    public ShooterCommand(ShooterSubsystem shooter, DoubleSupplier speedSupplier) {
+        this.shooter = shooter;
+        this.speedSupplier = speedSupplier;
+        addRequirements(shooter);
     }
 
     @Override
@@ -39,11 +39,11 @@ public class HammerMoveCommand extends Command {
 
     @Override
     public void execute() {
-        hammer.runVoltage(0.15 * voltageSupplier.getAsDouble());
+        shooter.setSpeed(0.15 * speedSupplier.getAsDouble());
     }
 
     @Override
     public void end(boolean interrupted) {
-        hammer.runVoltage(0.0);
+        shooter.stop();
     }
 }
