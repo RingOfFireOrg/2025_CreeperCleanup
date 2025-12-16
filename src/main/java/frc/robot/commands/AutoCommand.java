@@ -18,7 +18,7 @@ public class AutoCommand extends SequentialCommandGroup {
          
             //new ShooterCommand(shooter, ()->-0.5).withTimeout(5)
             new AutoDriveCommand(driveTrain, -1, -1).withTimeout(0.2),
-            new HammerMoveCommand(hammer, ()->0.9)
+            new HammerMoveCommand(hammer, ()->0.9).withTimeout(1)
         );
     } 
-}
+}0
