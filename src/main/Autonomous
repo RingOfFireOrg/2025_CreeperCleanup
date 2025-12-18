@@ -1,0 +1,39 @@
+package frc.robot.commands;
+import frc.robot.subsystems.DriveTrainSubSystem;
+import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj2.command.Command;
+
+public class Autonomous extends Command {
+
+  private final DriveTrainSubSystem drive;
+  private final Timer timer = new Timer();
+
+  public Autonomous(DriveTrainSubSystem drive) {
+    this.drive = drive;
+    addRequirements(drive); 
+    
+  }
+
+  @Override
+  public void initialize() {
+    timer.reset();
+    timer.start();
+  }
+
+  @Override
+  public void execute() {
+     drive.setLeftMotors(1);
+     drive.setRightMotors(1);
+  }
+
+  @Override
+  public boolean isFinished() {
+    return timer.get() > 5.0;
+    }
+
+  @Override
+  public void end(boolean interrupted) {
+    drive.setLeftMotors(0);
+    drive.setRightMotors(0); 
+  }
+} 
