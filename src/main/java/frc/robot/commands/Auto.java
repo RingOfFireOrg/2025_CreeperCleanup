@@ -9,10 +9,13 @@ import frc.robot.commands.AutoDriveCommand;
 public class Auto extends SequentialCommandGroup {
     public Auto(DriveTrainSubSystem drivetrain, HammerSubsystem blocker) {
         addCommands(
-            new AutoDriveCommand(drivetrain, 0.8, 0.5).withTimeout(1),
+            new AutoDriveCommand(drivetrain, 0.7, 0.5).withTimeout(1),
             new AutoDriveCommand(drivetrain, -0.5, -0.5).withTimeout(1.25),
             new AutoDriveCommand(drivetrain, -0.25, -0.3).withTimeout(0.5),
-            new HammerMoveCommand(blocker, () -> 0.5)   
+            new HammerMoveCommand(blocker, () -> 0.5).withTimeout(1),
+            new HammerMoveCommand(blocker, () -> -0.5).withTimeout(1),
+            new AutoDriveCommand(drivetrain, 0.6, 0.5).withTimeout(1),
+            new AutoDriveCommand(drivetrain, 0.5, 0.6).withTimeout(1)
         );
     }
 }
