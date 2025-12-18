@@ -28,8 +28,8 @@ import edu.wpi.first.wpilibj.XboxController;
 
 public final class Constants {
     // Drive Motor IDs
-    public static final int MOTOR_LEFT_1_ID = 0; // ID for left motor
-    public static final int MOTOR_RIGHT_1_ID = 1; // ID for right motor
+    public static final int MOTOR_LEFT_1_ID = 1; // ID for left motor
+    public static final int MOTOR_RIGHT_1_ID = 0; // ID for right motor
 
     // Controller IDs
     public static final int CONTROLLER_DRIVER_ID = 0; // Driver controller ID for drivetrain
@@ -41,7 +41,7 @@ public final class Constants {
 
     // Add separate inner classes for subsystem-specific constants
     public static final class DriveConstants {
-        public static final double SPEED_FACTOR = 0.82;
+        public static final double SPEED_FACTOR = 1;
     }
 
     // Hammer constants
