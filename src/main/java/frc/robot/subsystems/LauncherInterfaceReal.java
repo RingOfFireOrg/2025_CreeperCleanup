@@ -27,23 +27,22 @@ import com.revrobotics.spark.config.SparkBaseConfig.IdleMode;
 import com.revrobotics.spark.config.SparkMaxConfig;
 import edu.wpi.first.wpilibj.DriverStation;
 
-import edu.wpi.first.wpilibj.Timer;
-import frc.robot.Constants.HammerConstants;
+import frc.robot.Constants.LauncherConstants;;
 
-public class HammerInterfaceReal implements HammerInterface {
+public class LauncherInterfaceReal implements LauncherInterface {
     private final SparkMax motor;
     private SparkMaxConfig config = new SparkMaxConfig();
-    public static final int HammerCANID = HammerConstants.HammerCANID;;
+    public static final int LauncherCANID = LauncherConstants.LauncherCANID;;
     private double lastAppliedVolts = 0.0;
 
-    public HammerInterfaceReal() {
+    public LauncherInterfaceReal() {
         config.idleMode(IdleMode.kBrake).smartCurrentLimit(25);
-        motor = new SparkMax(HammerCANID, MotorType.kBrushless);
+        motor = new SparkMax(LauncherCANID, MotorType.kBrushless);
         motor.configure(config, ResetMode.kResetSafeParameters, PersistMode.kNoPersistParameters);
     }
 
     @Override
-    public void updateInputs(HammerInterfaceInputs inputs) {
+    public void updateInputs(LauncherInterfaceInputs inputs) {
         inputs.appliedVolts = lastAppliedVolts;
 
         if (DriverStation.isDisabled()) {
@@ -54,15 +53,15 @@ public class HammerInterfaceReal implements HammerInterface {
     @Override
     public void setVoltage(double volts) {
         lastAppliedVolts = volts;
-        motor.setVoltage(volts * HammerConstants.VoltageFactor);
+        motor.setVoltage(volts * LauncherConstants.VoltageFactor);
     }
 
     @Override
-    public void swingForward() {
+    public void intake() {
         motor.set(0.2); //Half speed forward
     }
 
-    public void swingBackward() {
+    public void outTake() {
         motor.set(-0.2); // Half speed reverse
     }
 
@@ -74,9 +73,4 @@ public class HammerInterfaceReal implements HammerInterface {
         motor.set(0);
     }
 
-    public void hitForTime(double seconds) {
-        swingForward();
-        Timer.delay(seconds);
-        stop();
-    }
 }

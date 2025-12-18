@@ -14,7 +14,7 @@ public class AutoCommand extends SequentialCommandGroup {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-      new AutodriveCommand(drivetrain, 0).withTimeout(5)
+      new AutodriveCommand(drivetrain, 0.5).withTimeout(2)
       
     );
   }

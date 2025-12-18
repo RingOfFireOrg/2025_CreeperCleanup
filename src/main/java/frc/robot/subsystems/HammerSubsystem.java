@@ -45,7 +45,7 @@ public class HammerSubsystem extends SubsystemBase {
 
     public double getPosition() {
         return inputs.positionDeg;
-    }
+    } 
 
     public double getVelocity() {
         return inputs.velocityDegPerSec;

@@ -23,12 +23,16 @@ package frc.robot;
 import edu.wpi.first.wpilibj.DigitalOutput;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import frc.robot.Constants.LauncherConstants;
 import frc.robot.commands.HammerMoveCommand;
+import frc.robot.commands.LauncherMoveCommand;
 import frc.robot.commands.TankDriveCommand;
 import frc.robot.subsystems.DriveTrainSubSystem;
 import frc.robot.subsystems.HammerInterfaceReal;
 import frc.robot.subsystems.HammerSubsystem;
-
+import frc.robot.subsystems.LauncherInterfaceReal;
+import frc.robot.subsystems.LauncherSubSystem;
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
  * "declarative" paradigm, very little robot logic should actually be handled in the {@link Robot}
@@ -41,7 +45,10 @@ public class RobotContainer {
 
     private final DriveTrainSubSystem driveTrain = new DriveTrainSubSystem();
     private final HammerSubsystem hammer = new HammerSubsystem(
-            new HammerInterfaceReal(Constants.HammerConstants.kMotorPWMPort));
+            new HammerInterfaceReal());
+    private final LauncherSubSystem launcher = new LauncherSubSystem(
+            new LauncherInterfaceReal());
+
 
     private final DigitalOutput dioPin0 = new DigitalOutput(0);
     private final DigitalOutput dioPin1 = new DigitalOutput(1);
@@ -65,7 +72,19 @@ public class RobotContainer {
                                     - ManipulatorController.getLeftTriggerAxis();
                             return xAxis * Constants.HammerConstants.kMaxVoltage;
                         }));
-    }
+
+        new JoystickButton(ManipulatorController,XboxController.Button.kA.value)
+                .onTrue(new LauncherMoveCommand(
+                    launcher,
+                    LauncherConstants.speed
+                )); 
+
+        new JoystickButton(ManipulatorController,XboxController.Button.kB.value)
+                .onTrue(new LauncherMoveCommand(
+                    launcher,
+                    -LauncherConstants.speed
+                    ));
+    }     
 
     /** Set color for NeoPixels */
     private void setNeoPixelColor() {
