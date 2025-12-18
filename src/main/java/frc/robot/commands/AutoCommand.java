@@ -16,9 +16,25 @@ public class AutoCommand extends SequentialCommandGroup {
         addCommands(
 
             //new ShooterCommand(shooter, ()->-0.5).withTimeout(5)
-            new AutoDriveCommand(driveTrain, 1, 1).withTimeout(0.5),
+            new AutoDriveCommand(driveTrain, 1, 1).withTimeout(0.55),
             new AutoDriveCommand(driveTrain, -1, 0).withTimeout(0.8),
-            new AutoDriveCommand(driveTrain, -1, -1).withTimeout(0.5)
+            new AutoDriveCommand(driveTrain, 0, 0).withTimeout(0.8),
+            new AutoDriveCommand(driveTrain, -1, -1).withTimeout(0.2),
+            new AutoDriveCommand(driveTrain, -0.1, -0.1).withTimeout(0.1),
+            new AutoDriveCommand(driveTrain, -0.1, -0.1).withTimeout(0.1),
+            new AutoDriveCommand(driveTrain, -0.1, -0.1).withTimeout(0.1),
+            new AutoDriveCommand(driveTrain, -0.1, -0.1).withTimeout(0.1),
+            new AutoDriveCommand(driveTrain, -0.1, -0.1).withTimeout(0.1),
+            new AutoDriveCommand(driveTrain, -0.1, -0.1).withTimeout(0.1),
+            new AutoDriveCommand(driveTrain, -0.1, -0.1).withTimeout(0.1),
+            new AutoDriveCommand(driveTrain, -0.1, -0.1).withTimeout(0.1),
+            new AutoDriveCommand(driveTrain, -0.1, -0.1).withTimeout(0.1),
+            new AutoDriveCommand(driveTrain, -0.1, -0.1).withTimeout(0.1),
+            new AutoDriveCommand(driveTrain, -0.1, -0.2).withTimeout(0.1),
+            new AutoDriveCommand(driveTrain, -0.1, -0.2).withTimeout(0.1),
+            new AutoDriveCommand(driveTrain, -0.1, -0.2).withTimeout(0.1),
+            new AutoDriveCommand(driveTrain, -0.1, -0.2).withTimeout(0.1),
+            new ShooterCommand(shooter, ()->-0.7).withTimeout(11)
         );
     } 
 }
