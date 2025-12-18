@@ -29,6 +29,7 @@ import frc.robot.Constants.AutoConstants;
  //import frc.robot.Constants.HammerConstants;
  import frc.robot.commands.*;
  import frc.robot.subsystems.*;
+
  
  /**
   * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -110,5 +111,6 @@ import frc.robot.Constants.AutoConstants;
      }
  
      
-     //ppublic Command getAutonomousCommand() {
+     public Command getAutonomousCommand() {
+      return new Autonomous(driveTrain);
      }
