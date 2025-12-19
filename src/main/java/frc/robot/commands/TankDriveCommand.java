@@ -48,8 +48,8 @@ public class TankDriveCommand extends Command {
     SmartDashboard.putNumber("LeftStickValue", LeftStickY);
     SmartDashboard.putNumber("RightStickValue", RightStickY);
 
-    driveTrain.setLeftMotors(calculateSpeed(LeftStickY));
-    driveTrain.setRightMotors(calculateSpeed(RightStickY));
+    driveTrain.setLeftMotors(-calculateSpeed(LeftStickY));
+    driveTrain.setRightMotors(-calculateSpeed(RightStickY));
   }
 
   @Override
